@@ -1,0 +1,57 @@
+ListenPort: 30120
+
+PreParseResources:
+    - mapmanager
+
+AutoStartResources:
+    - chat
+    - spawnmanager
+    - fivem-map-hipster
+    - baseevents
+    - rconlog
+    - hardcap # prevents the game from breaking
+    - vrp
+    - keks
+    - assets
+    - deleteveh
+    - frfuel
+    - InteractSound # Tied to LockSystem
+    - LockSystem # Tied to Interact Sound
+    - lscustoms
+    - ooc 
+#    - speedcamera 
+    - jscoreboard 
+    - playerblips 
+    - handsup 
+#    - drag
+    - vehcontrol
+    - pausemenu-title
+    - hazards
+    - NeverWanted
+    - Driver
+    - msq-directions-hud
+    - NameTag
+    
+# do change
+RconPassword: dimdim
+
+# configure this, please
+Hostname: HighRolers RP -=WHITELISTED=-
+
+ScriptDebug: true
+
+DebugLog: true
+
+# set to false to hide from the online server list
+Announce: true
+
+# set to false to require players to be signed in to Steam
+DisableAuth: true
+
+# set to true to disable local script hook plugins
+DisableScriptHook: false
+# uncomment and set to the path of an icon to use in the server browser. it should be square.
+ServerIcon: HighRolers2.png
+
+# don't try enabling this
+#UseGameServerV2: true
