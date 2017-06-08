@@ -9,7 +9,13 @@ AddEventHandler('chatMessageEntered', function(name, color, message)
     TriggerEvent('chatMessage', source, name, message)
 
     if not WasEventCanceled() then
-        TriggerClientEvent('chatMessage', -1, name, color, message)
+        if message[0] == "/" then
+            local commands = split(message)
+            TriggerEvent('chatCommandEntered', commands, source)
+            TriggerClientEvent('chatCommandEntered', source, commands, source)
+        else
+            TriggerClientEvent('chatMessage', -1, name, color, message)
+        end
     end
 
     print(name .. ': ' .. message)
@@ -48,3 +54,15 @@ AddEventHandler('rconCommand', function(commandName, args)
         CancelEvent()
     end
 end)
+
+function split(inputstr, sep)
+	if sep == nil then
+		sep = "%s"
+	end
+	local t={} ; i=1
+	for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+        t[i] = str
+        i = i + 1
+	end
+	return t
+end

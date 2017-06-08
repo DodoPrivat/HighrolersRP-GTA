@@ -214,7 +214,7 @@ local function enter_slot(user_id,player,stype,sid) -- called when a player ente
   end
 
   local nid = "vRP:home:slot"..stype..sid
-  vRPclient.setNamedMarker(player,{nid,x,y,z-1,0.7,0.7,0.5,0,255,125,125,150})
+  vRPclient.setNamedMarker(player,{nid,x,y,z-1,2.5,2.5,0.5,0,255,125,125,150})
   vRP.setArea(player,nid,x,y,z,1,1.5,entry_enter,entry_leave)
 end
 

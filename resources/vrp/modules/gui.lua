@@ -9,7 +9,7 @@ local client_menus = {}
 local rclient_menus = {}
 
 -- open dynamic menu to client
--- menudef: .name and choices as key/{callback,description} (optional element html description) 
+-- menudef: .name and choices as key/{callback,description} (optional element html description)
 -- menudef optional: .css{ .top, .header_color }
 function vRP.openMenu(source,menudef)
   local menudata = {}
@@ -22,13 +22,13 @@ function vRP.openMenu(source,menudef)
       table.insert(menudata.choices,{k,v[2]})
     end
   end
-  
+
   -- name
   menudata.name = menudef.name or "Menu"
   menudata.css = menudef.css or {}
 
   -- set new id
-  menudata.id = menu_ids:gen() 
+  menudata.id = menu_ids:gen()
 
   -- add client menu
   client_menus[menudata.id] = {def = menudef, source = source}
@@ -85,7 +85,7 @@ local main_menu_builds = {}
 
 -- open the player main menu
 function vRP.openMainMenu(source)
-  local menudata = {name="Main menu",css={top="75px",header_color="rgba(0,125,255,0.75)"}}
+  local menudata = {name="Main Menu",css={top="75px",header_color="rgba(0,125,255,0.75)"}}
   main_menu_builds[source] = menudata
 
   TriggerEvent("vRP:buildMainMenu",source) -- all resources can add choices to the menu using vRP.buildMainMenu(player,choices)

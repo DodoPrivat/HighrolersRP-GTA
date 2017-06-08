@@ -13,32 +13,35 @@ html, body {
 .console{
   background-color: white;
   color: red;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 /* menu */
 
 .menu{
-  background-color: rgba(0,0,0,0.75);
+  background-color: rgba(0,0,0,0.75); /*Choices BG*/
   color: white;
-  width: 250px;
+  width: 200px;
   height: 50%;
   position: absolute;
-  font-weight: bold;
+  font-weight: normal;
+  border-bottom: 4.5px solid grey;
 }
 
 .menu_description{
-  background-color: rgba(0,0,0,0.75);
+  background-color: rgba(0,0,0,0.75); /*White*/
   color: white;
   position: absolute;
-  font-weight: bold;
+  font-weight: normal;
+  border-style: solid;
+  border-width: 1px;
   padding: 9px;
   font-size: 1.2em;
   max-width: 500px;
 }
 
 .menu h1{
-  background-color: rgba(255,0,0,0.75);
+  background-color: rgba(255,45,0,0.75); /*Red*/
   color: white;
   text-align: center;
   font-size: 1.6em;
@@ -50,11 +53,12 @@ html, body {
   overflow-x: hidden;
 }
 
-.choices::-webkit-scrollbar{ 
-  display: none; 
+.choices::-webkit-scrollbar{
+  display: none;
 }
 
 .choices div{
+  text-align: center;
   padding: 6px;
   font-size: 1.3em;
 }
@@ -148,4 +152,3 @@ html, body {
   color: rgb(255,0,0);
   font-size: 1em;
 }
-

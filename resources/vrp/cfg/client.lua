@@ -7,9 +7,9 @@ cfg.iplload = true
 cfg.voice_proximity = 20.0 --50.0
 
 cfg.gui = {
-  anchor_minimap_width = 260,
-  anchor_minimap_left = 60,
-  anchor_minimap_bottom = 213
+  anchor_minimap_width = 260, --260
+  anchor_minimap_left = 550, --60
+  anchor_minimap_bottom = 50 --213
 }
 
 -- disable menu if handcuffed
@@ -26,4 +26,4 @@ cfg.coma_duration = 5 --10
 cfg.coma_disable_menu = true
 
 -- see https://wiki.fivem.net/wiki/Screen_Effects
-cfg.coma_effect = "DeathFailMPIn"
+cfg.coma_effect = "DeathFailOut" -- DeathFailMPIn

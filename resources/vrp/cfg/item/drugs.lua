@@ -13,7 +13,9 @@ end
 
   local function play_smoke(player)
    local seq = {
-    {"amb@world_human_smoking_pot@male@base"}
+  {"mp_player_int_smoke","mp_player_int_uppersmoke",1},
+  {"mp_player_int_smoke_enter","mp_player_int_uppersmoke",1},
+  {"mp_player_int_smoke_exit","mp_player_int_uppersmoke",1}
   }
 
   vRPclient.playAnim(player,{true,seq,false})
@@ -42,7 +44,7 @@ weed_choices["Smoke"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"weed",1) then
       vRP.varyThirst(user_id, 5)
-      vRP.varyHunger(user_id, 30)
+      vRP.varyHunger(user_id, 20)
       vRPclient.notify(player,{"~b~ Smoking Weed."})
       vRPclient.playScreenEffect(player,{"DrugsTrevorClownsFight",3*60})
       play_smoke(player)
@@ -60,14 +62,14 @@ marijuana_choices["Eat?"] = {function(player,choice)
     if vRP.tryGetInventoryItem(user_id,"marijuana",1) then
       vRPclient.varyHealth(player,{-5})
       vRP.varyThirst(user_id, 2)
-      vRP.varyHunger(user_id, 10)
+      vRP.varyHunger(user_id, 8.5)
       vRPclient.notify(player,{"~b~Eating Raw Marijuana... are you stupid?"})
       play_drink(player)
       vRP.closeMenu(player)
     end
   end
 end}
-items["marijuana"] = {"Marijuana","The Raw Dawg of Weed",weed_choices,0.5}
+items["marijuana"] = {"Marijuana","The Raw Dawg of Weed",weed_choices,1}
 
 
 

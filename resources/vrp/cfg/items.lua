@@ -29,6 +29,13 @@ cfg.items = {
       end
     end}
   }},
+
+
+
+  ["gold_ore"] = {"Gold Ore","",{},4},
+  ["gold_processed"] = {"Processed Gold","",{},3},
+  ["gold_ingot"] = {"Gold Ingot","",{},2}
+  -- items["breed"] = {"Bread","",breed_choices,0.5}
 }
 
 -- load more items function

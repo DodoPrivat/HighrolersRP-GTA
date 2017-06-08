@@ -73,8 +73,8 @@ ProgressBar.prototype.frame = function(time)
         this.div_label.style.fontSize = "1em";
 
         //set position
-        this.div.style.left = (document.body.offsetWidth-this.div.offsetWidth-100)+"px";
-        this.div.style.top = (document.body.offsetHeight-120-anchor_index*22)+"px";
+        this.div.style.left = (document.body.offsetWidth-this.div.offsetWidth-150)+"px"; /*replace 150 with 100*/
+        this.div.style.top = (document.body.offsetHeight-120-anchor_index*200)+"px"; /*replace 200 with 22*/
       }
       else if(anchor_name == "center"){ //CENTER
         //set size

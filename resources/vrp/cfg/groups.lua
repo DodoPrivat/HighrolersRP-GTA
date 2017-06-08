@@ -130,23 +130,31 @@ cfg.groups = {
     "police.seize.items",
     "police.fine",
     "police.jail",
+    "police.drag",
 	  "emergency.revive",
-    "emergency.shop"
+    "emergency.shop",
+    "police.paycheck"
   },
   ["EMS"] = {
  _config = { gtype = "job", onspawn = ems.onspawn, onjoin = ems.onjoin, onleave = ems.onleave },
     "emergency.revive",
     "emergency.shop",
     "emergency.service",
-    "emergency.vehicle"
+    "emergency.vehicle",
+    "police.paycheck",
+    "ems.cloakroom"
   },
   ["taxi"] = {
     _config = { gtype = "job", onspawn = taxi.onspawn, onjoin = taxi.onjoin, onleave = taxi.onleave },
     "taxi.service",
-    "taxi.vehicle"
+    "taxi.vehicle",
+    "taxi.paycheck"
   },
   ["citizen"] = {
     _config = { gtype = "job" }
+    "player.phone",
+    "player.calladmin",
+    "citizen.paycheck"
   }
 }
 

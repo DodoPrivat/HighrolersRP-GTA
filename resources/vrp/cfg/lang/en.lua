@@ -29,19 +29,19 @@ local lang = {
   inventory = {
     title = "Inventory",
     description = "Open Inventory.",
-    iteminfo = "({1})<br /><br />{2}<br /><em>{3} kg</em>",
-    info_weight = "weight {1}/{2} kg",
+    iteminfo = "({1})<br /><br />{2}<br /><em>{3} lbs</em>",
+    info_weight = "Weight : {1}/{2} lbs",
     give = {
       title = "Give",
       description = "Give items to the nearest person.",
-      prompt = "Amount to give (max {1}):",
+      prompt = "Amount to give (You have : {1}):",
       given = "Given ~r~{1} ~s~{2}.",
       received = "Received ~g~{1} ~s~{2}.",
     },
     trash = {
       title = "Trash",
       description = "Destroy items.",
-      prompt = "Amount to trash (max {1}):",
+      prompt = "Amount to trash (You have : {1}):",
       done = "Trashed ~r~{1} ~s~{2}."
     },
     missing = "~r~Missing {2} {1}.",
@@ -52,11 +52,11 @@ local lang = {
       full = "~r~Chest full.",
       take = {
         title = "Take",
-        prompt = "Amount to take (max {1}):"
+        prompt = "Amount to take (Has : {1}):"
       },
       put = {
         title = "Put",
-        prompt = "Amount to put (max {1}):"
+        prompt = "Amount to put (You have : {1}):"
       }
     }
   },
@@ -76,7 +76,7 @@ local lang = {
       title = "Withdraw",
       description = "From Bank to Wallet",
       prompt = "Enter amount of money to withdraw:",
-      withdrawn = "~g~{1}$ ~s~withdrawn.",
+      withdrawn = "~s~You withdrew ~g~${1}",
       not_enough = "~r~You don't have enough money in bank."
     }
   },
@@ -166,6 +166,10 @@ local lang = {
         title = "Handcuff",
         description = "Handcuff/unhandcuff nearest person."
       },
+      drag = {
+        title = "Drag",
+        description = "-COMING SOON-" --"Drag the nearest person to you."
+      },
       putinveh = {
         title = "Put in vehicle",
         description = "Put the nearest person in the nearest vehicle, as passenger."
@@ -184,22 +188,22 @@ local lang = {
         info = "<em>money: </em>{1} $<br /><br /><em>items: </em>{2}<br /><br /><em>weapons: </em>{3}",
         checked = "You have been searched."
       },
-       },
       seize = {
         seized = "Seized {2} ~r~{1}",
         weapons = {
           title = "Seize weapons",
-          description = "Seize nearest player weapons",
+          description = "Seize nearest persons weapons",
           seized = "~b~Your weapons have been seized."
         },
         items = {
-          title = "Seize illegals",
+          title = "Seize Illegal Items",
           description = "Seize illegal items",
-          seized = "~b~Your illegal stuff has been seized."
+          seized = "~b~Your illegal items have been seized."
+        }
       },
       jail = {
         title = "Jail",
-        description = "Jail/UnJail nearest player in/from the nearest jail.",
+        description = "Jail/UnJail nearest Person.",
         not_found = "~r~No jail found.",
         jailed = "~b~Jailed.",
         unjailed = "~b~Unjailed.",
@@ -208,7 +212,7 @@ local lang = {
       },
       fine = {
         title = "Fine",
-        description = "Fine the nearest player.",
+        description = "Fine the nearest person.",
         fined = "~b~Fined ~s~{2} $ for ~b~{1}.",
         notify_fined = "~b~You have been fined ~s~ {2} $ for ~b~{1}."
       }
@@ -221,7 +225,7 @@ local lang = {
     menu = {
       revive = {
         title = "Revive",
-        description = "Revive the nearest player.",
+        description = "Revive the nearest person.",
         not_in_coma = "~r~Not in coma."
       }
     }
@@ -353,6 +357,12 @@ local lang = {
   },
   skinshop = {
     title = "Skinshop"
+  },
+    cloakroom = {
+    title = "Cloakroom ({1})",
+    undress = {
+      title = "> Undress"
+    }
   },
   itemtr = {
     informer = {

@@ -3,13 +3,15 @@ local chatInputActivating = false
 
 RegisterNetEvent('chatMessage')
 
-AddEventHandler('chatMessage', function(name, color, message)
+function printChatLine(name, color, message)
     SendNUIMessage({
         name = name,
         color = color,
         message = message
     })
-end)
+end
+
+AddEventHandler('chatMessage', printChatLine)
 
 RegisterNUICallback('chatResult', function(data, cb)
     chatInputActive = false

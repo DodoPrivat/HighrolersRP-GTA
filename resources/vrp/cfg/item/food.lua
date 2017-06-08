@@ -52,7 +52,7 @@ milk_choices["Drink"] = {function(player,choice)
     end
   end
 end}
-items["milk"] = {"Milk","",milk_choices,0.5}
+items["milk"] = {"Milk","",milk_choices,0.3}
 
 -- create Coffee item
 local coffee_choices = {}
@@ -191,7 +191,7 @@ whiskey_choices["Drink"] = {function(player,choice)
     end
   end
 end}
-items["jackncoke"] = {"Jack n Coke","",whiskey_choices,0.5}
+items["whiskey"] = {"Whiskey","",whiskey_choices,0.5}
 
 -- create JackNCoke item
 local jackncoke_choices = {}
@@ -208,24 +208,7 @@ jackncoke_choices["Drink"] = {function(player,choice)
     end
   end
 end}
-items["jackncoke"] = {"Jack n Coke","",jackncoke_choices,0.5}
-
--- create JackNCoke item
-local jackncoke_choices = {}
-jackncoke_choices["Drink"] = {function(player,choice)
-  local user_id = vRP.getUserId(player)
-  if user_id ~= nil then
-    if vRP.tryGetInventoryItem(user_id,"jackncoke",1) then
-      vRP.varyThirst(user_id,-65)
-      vRP.varyHunger(user_id, 15)
-      vRPclient.notify(player,{"~b~ Drinking Jack n Coke."})
-      vRPclient.playScreenEffect(player,{"DrugsDrivingIn",3*60})
-      play_drink(player)
-      vRP.closeMenu(player)
-    end
-  end
-end}
-items["jackncoke"] = {"Jack n Coke","",jackncoke_choices,0.5}
+items["jackncoke"] = {"Jack n Coke","",jackncoke_choices,0.7}
 
 -- create Beer item
 local beer_choices = {}
@@ -259,7 +242,7 @@ wine_choices["Drink"] = {function(player,choice)
     end
   end
 end}
-items["wine"] = {"Wine","",wine_choices,0.5}
+items["wine"] = {"Wine","",wine_choices,0.8}
 
 
 --FOOD
@@ -278,7 +261,39 @@ breed_choices["Eat"] = {function(player,choice)
   end
 end}
 
-items["breed"] = {"Breed","",breed_choices,0.5}
+items["breed"] = {"Bread","",breed_choices,0.5}
+
+-- create Corn item
+local corn_choices = {}
+corn_choices["Eat"] = {function(player,choice)
+  local user_id = vRP.getUserId(player)
+  if user_id ~= nil then
+    if vRP.tryGetInventoryItem(user_id,"corn",1) then
+      vRP.varyHunger(user_id,-20)
+      vRPclient.notify(player,{"~o~ Eating Corn."})
+      play_eat(player)
+      vRP.closeMenu(player)
+    end
+  end
+end}
+
+items["corn"] = {"Corn","",corn_choices,0.5}
+
+-- create Wings item
+local wings_choices = {}
+wings_choices["Eat"] = {function(player,choice)
+  local user_id = vRP.getUserId(player)
+  if user_id ~= nil then
+    if vRP.tryGetInventoryItem(user_id,"wings",1) then
+      vRP.varyHunger(user_id,-20)
+      vRPclient.notify(player,{"~o~ Eating Wings."})
+      play_eat(player)
+      vRP.closeMenu(player)
+    end
+  end
+end}
+
+items["Wings"] = {"Wings","",wings_choices,0.5}
 
 -- create Donut item
 local donut_choices = {}
@@ -294,6 +309,21 @@ donut_choices["Eat"] = {function(player,choice)
   end
 end}
 items["donut"] = {"Donut","",donut_choices,0.2}
+
+-- create Peach item
+local peach_choices = {}
+peach_choices["Eat"] = {function(player,choice)
+  local user_id = vRP.getUserId(player)
+  if user_id ~= nil then
+    if vRP.tryGetInventoryItem(user_id,"peach",1) then
+      vRP.varyHunger(user_id,-15)
+      vRPclient.notify(player,{"~o~ Eating Peach."})
+      play_eat(player)
+      vRP.closeMenu(player)
+    end
+  end
+end}
+items["peach"] = {"Peach","",peach_choices,0.2}
 
 -- create Tacos item
 local tacos_choices = {}
@@ -324,7 +354,7 @@ sd_choices["Eat"] = {function(player,choice)
   end
 end}
 
-items["sandwich"] = {"Sandwich","A tasty snack.",sd_choices,0.5}
+items["sandwich"] = {"Sandwich","A tasty snack.",sd_choices,0.8}
 
 -- create Kebab item
 local kebab_choices = {}
@@ -340,7 +370,7 @@ kebab_choices["Eat"] = {function(player,choice)
   end
 end}
 
-items["kebab"] = {"Kebab","",kebab_choices,0.85}
+items["kebab"] = {"Kebab","",kebab_choices,0.4}
 
 -- create Premium Donut item
 local pdonut_choices = {}
@@ -358,21 +388,5 @@ end}
 
 items["pdonut"] = {"Premium Donut","",pdonut_choices,0.5}
 
--- -- create Peach item
--- local fruit_peche_choices = {}
--- fruit_peche_choices["Eat"] = {function(player,choice)
---   local user_id = vRP.getUserId(player)
---   if user_id ~= nil then
---     if vRP.tryGetInventoryItem(user_id,"fruit_peche",1) then
---       vRP.varyHunger(user_id,-25)
---       vRP.varyThirst(user_id,-10)
---       vRPclient.notify(player,{"~o~ Eating Peach."})
---       play_eat(player)
---       vRP.closeMenu(player)
---     end
---   end
--- end}
-
--- items["fruit_peche"] = {"Peach","",fruit_peche_choices,0.5}
 
 return items

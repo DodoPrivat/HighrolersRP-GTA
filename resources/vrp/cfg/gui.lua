@@ -10,7 +10,7 @@ local cfg = {}
 cfg.css = [[
 @font-face {
   font-family: "Titillium Web";
-  src: url(https://fonts.googleapis.com/css?family=Titillium+Web:300) format("sans-serif");
+  src: url(TitilliumWeb-Regular) format("sans-serif");
 }
 
 body{

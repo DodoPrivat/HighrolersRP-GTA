@@ -29,7 +29,6 @@ local garage_menus = {}
 
 for group,vehicles in pairs(vehicle_groups) do
   local veh_type = vehicles._config.vtype or "default"
-
   local menu = {
     name=lang.garage.title({group}),
     css={top = "75px", header_color="rgba(255,125,0,0.75)"}
@@ -154,7 +153,7 @@ local function build_client_garages(source)
         end
 
         vRPclient.addBlip(source,{x,y,z,gcfg.blipid,gcfg.blipcolor,lang.garage.title({gtype})})
-        vRPclient.addMarker(source,{x,y,z-1,0.7,0.7,0.5,0,255,125,125,150})
+        vRPclient.addMarker(source,{x,y,z-1,2.5,2.5,0.5,0,255,125,125,150})
 
         vRP.setArea(source,"vRP:garage"..k,x,y,z,1,1.5,garage_enter,garage_leave)
       end

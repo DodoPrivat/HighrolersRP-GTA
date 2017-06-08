@@ -32,7 +32,9 @@ cfg.market_types = {
   ["drugstore"] = {
     _config = {blipid=51, blipcolor=2, permission="emergency.shop"},
     ["medkit"] = 5,
-    ["pills"] = 2
+    ["pills"] = 2,
+    ["coffee"] = 0,
+    ["donut"] = 0
   },
   ["bar"] = {
     _config = {blipid=93, blipcolor=4},
@@ -41,6 +43,7 @@ cfg.market_types = {
     ["whiskey"] = 20,
     ["beer"] = 10,
     ["wine"] = 55,
+    ["wings"] = 25
   }
 }
 
@@ -48,7 +51,6 @@ cfg.market_types = {
 -- list of markets {type,x,y,z}
 
 cfg.markets = {
-  {"food",128.1410369873, -1286.1120605469, 29.281036376953}, --StripClub
   {"food",-47.522762298584,-1756.85717773438,29.4210109710693},
   {"food",25.7454013824463,-1345.26232910156,29.4970207214355}, 
   {"food",1135.57678222656,-981.78125,46.4157981872559}, 

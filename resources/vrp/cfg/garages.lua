@@ -111,8 +111,6 @@ cfg.garage_types = {
     ["dune"] = {"Dune Buggy",20000, ""},
     ["rebel2"] = {"Rebel",22000, ""},
     ["sandking"] = {"Sandking",38000, ""},
-    ["monster"] = {"The Liberator",550000, ""},
-    ["trophytruck"] = {"The Liberator",550000, ""},
     ["baller"] = {"Baller",90000, ""},
     ["cavalcade"] = {"Cavalcade",60000, ""},
     ["granger"] = {"Grabger",35000, ""},
@@ -169,7 +167,6 @@ cfg.garage_types = {
     ["hakuchou"] = {"Hakuchou",82000, ""},
     ["hexer"] = {"Hexer",15000, ""},
     ["innovation"] = {"Innovation",90000, ""},
-    ["lectro"] = {"Lectro",700000, ""},
     ["nemesis"] = {"Nemesis",12000, ""},
     ["pcj"] = {"PCJ-600",9000, ""},
     ["ruffian"] = {"Ruffian",9000, ""},
@@ -249,22 +246,24 @@ cfg.garage_types = {
   },
   ["transport"] = {
     _config = {vtype="car",blipid=318,blipcolor=4},
-    ["packer"] = {"Packer", 42000, "18-Wheeler Cabin"},
-    ["benson"] = {"Benson", 25000, "Large Box Truck"},
-    ["bison"] = {"Bison", 12000, "PickUp Truck"}
+    ["packer"] = {"Packer", 42000, "18-Wheeler Cabin : Holds 50lbs"},
+    ["benson"] = {"Benson", 25000, "Large Box Truck : Holds 50lbs"},
+    ["bison"] = {"Bison", 12000, "PickUp Truck : Holds 120lbs"},
+    ["burrito3"] = {"Declasse Burriot", 18000, "Van : Holds 100lbs"},
+    ["pounder"] = {"MTL Pounder", 28000, "Large Truck w/ Cabin and Trailer : Holds 150lbs"}
   },
   ["trailers"] = {
     _config = {vtype="trailer",blipid=318,blipcolor=17},
-    ["trailersmall"] = {"Petit", 3000, "Small Trailer"},
-    ["trailers"] = {"Basic", 30000, "18-Wheeler Trailer"},
-    ["tanker"] = {"Tanker", 300000, "18-Wheeler Tanker Trailer"}
+    ["trailersmall"] = {"Petit", 3000, "Small Trailer : Holds 100lbs"},
+    ["trailers"] = {"Basic", 30000, "18-Wheeler Trailer : Holds 350lbs"},
+    ["tanker"] = {"Tanker", 5000, "18-Wheeler Tanker Trailer : Holds 500lbs"}
   }
 }
 
 -- {garage_type,x,y,z}
 cfg.garages = {
   {"cars",-35.1228446960449,-1101.60632324219,26.4223537445068},
-  {"beaters",-35.1228446960449,-1101.60632324219,26.4223537445068},
+  {"beaters",261.612365722656,-1186.61938476563,29.510461807251},
   {"taxi",-286.870056152344,-917.948181152344,31.080623626709},
   {"police",454.4,-1017.6,28.4},
   {"EMS",-492.08544921875,-336.749206542969,34.3731842041016},
