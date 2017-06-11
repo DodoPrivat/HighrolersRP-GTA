@@ -43,7 +43,8 @@ cfg.market_types = {
     ["whiskey"] = 20,
     ["beer"] = 10,
     ["wine"] = 55,
-    ["wings"] = 25
+    ["wings"] = 25,
+    ["Box of Matches"] = 8
   }
   -- ["tools"] = {
   --   _config = {blipid=51, blipcolor=47},

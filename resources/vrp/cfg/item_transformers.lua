@@ -38,14 +38,14 @@ cfg.item_transformers = {
     products={}
   },
   {
-    name="Gold Mine",
+    name="Gold Rich River",
     r=255,g=255,b=0,
     max_units=5000,
     units_per_minute=5000,
     x=123.05940246582,y=3336.2939453125,z=30.7280216217041,
     radius=30, height=8,
-    action="Mine for Gold",
-    description="Mine for Gold",
+    action="Pan for Gold",
+    description="Pan for Gold",
     in_money=0,
     out_money=0,
     reagents={},
@@ -106,7 +106,78 @@ cfg.item_transformers = {
     products={
       ["weed"] = 1
     }
-  },
+},
+   -- Meth 
+  {
+    name="Household Supplies",
+    r=255,g=125,b=24,
+    max_units=5000,
+    units_per_minute=5000,
+    x=-803.462158203125,y=169.876571655273,z=76.7403106689453, 
+    radius=15, height=4,
+    action="Search for Supplies",
+    description="Steal Household Supplies",
+    in_money=0,
+    out_money=0,
+    reagents={},
+    products={
+      ["Nail Polish Remover"] = 1,
+      ["Drain Cleaner"] = 1,
+      ["Window Cleaner"] = 1
+    }
+},
+
+    {
+    name="Cold Medicine",
+    r=255,g=125,b=24,
+    max_units=5000,
+    units_per_minute=5000,
+    x=95.1359405517578,y=-1604.95568847656,z=29.5917186737061, 
+    radius=15, height=4,
+    action="Search for Supplies",
+    description="Steal Cold Medicine",
+    in_money=0,
+    out_money=0,
+    reagents={},
+    products={
+      ["Cold Medicine"] = 1
+    }
+},
+
+  {
+    name="Lab Supplies",
+    r=255,g=125,b=24,
+    max_units=5000,
+    units_per_minute=5000,
+    x=3559.68139648438,y=3674.55712890625,z=28.1218738555908, 
+    radius=3, height=4,
+    action="Search for Supplies",
+    description="Steal Lab Supplies",
+    in_money=0,
+    out_money=0,
+    reagents={},
+    products={
+      ["Hydrochloric Acid"] = 1,
+      ["lye"] = 1
+    }
+},
+
+    {
+    name="Brake Fluid",
+    r=255,g=125,b=24,
+    max_units=5000,
+    units_per_minute=5000,
+    x=-1150.20874023438,y=-2016.98706054688,z=13.1802616119385, -- -1150.20874023438,-2016.98706054688,13.1802616119385
+    radius=5, height=4,
+    action="Searching...",
+    description="Steal Brake Fluid",
+    in_money=0,
+    out_money=0,
+    reagents={},
+    products={
+      ["Brake Fluid"] = 1
+    }
+},
    {
     name="Meth Lab",
     r=255,g=255,b=0,
@@ -119,17 +190,17 @@ cfg.item_transformers = {
     in_money=0,
     out_money=0,
     reagents={
-      ["Nail Polish Remover"] = 1,
-      ["Window Cleaner"] = 1,
-      ["Cold Medicine"] = 1,
-      ["Hydrochloic Acid "] = 1,
-      ["Box of Matches"] = 1,
-      ["Brake Fluid"] = 1,
-      ["lye"] = 1,
-      ["Drain Cleaner"] =1
+    ["Nail Polish Remover"] = 10,
+    ["Window Cleaner"] = 3,
+    ["Cold Medicine"] = 15,
+    ["Hydrochloric Acid "] = 8,
+    ["Box of Matches"] = 8,
+    ["Brake Fluid"] = 9,
+    ["lye"] = 8,
+    ["Drain Cleaner"] = 14
     },
     products={
-      ["Meth"] = 8
+      ["Meth"] = 15
     }
   },
     {
@@ -150,6 +221,26 @@ cfg.item_transformers = {
     ["dirty_money"] = 400
   }
 },
+
+  {
+   name=" Meth Dealer",
+   r=255,g=255,b=0,
+   max_units=5000,
+   units_per_minute=5000,
+   x=16.8569660186768,y=3718.5234375,z=39.6396255493164,
+   radius=10,height=4,
+   action="Sell",
+   description="Sell Meth",
+   in_money=0,
+   out_money=0,
+   reagents={
+     ["meth"] = 2,
+   },
+   products={
+   ["dirty_money"] = 800
+  }
+},
+
   {
     name="Jeweler",
     r=255,g=255,b=0,
