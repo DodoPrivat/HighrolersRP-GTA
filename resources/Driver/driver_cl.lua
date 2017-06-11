@@ -166,6 +166,7 @@ Citizen.CreateThread(function()
 		    end
 			blippermis = nil
 		    DrawMissionText2("~g~Congrats! Here is your ~b~driver's license~g~ !", 5000)
+			
 			onPermis = 0
 		end
 	end

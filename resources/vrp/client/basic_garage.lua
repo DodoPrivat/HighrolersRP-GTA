@@ -91,6 +91,22 @@ function tvRP.getOwnedVehiclePosition()
   return false,0,0,0
 end
 
+-- Fix Vehicle
+function tvRP.fixeNearestVehicle(radius)
+  local veh = tvRP.getNearestVehicle(radius)
+  if IsEntityAVehicle(veh) then
+    SetVehicleFixed(veh)
+  end
+end
+
+function tvRP.replaceNearestVehicle(radius)
+  local veh = tvRP.getNearestVehicle(radius)
+  if IsEntityAVehicle(veh) then
+    SetVehicleOnGroundProperly(veh)
+  end
+end
+
+
 -- eject the ped from the vehicle
 function tvRP.ejectVehicle()
   local ped = GetPlayerPed(-1)

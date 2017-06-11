@@ -35,3 +35,13 @@ AddEventHandler('paycheck:salary', function()
 		vRPclient.notify(source,{"Welfare: $50"})
 	end																														
 end)
+
+RegisterServerEvent('paycheck:bill')
+AddEventHandler('paycheck:bill', function()
+  	local user_id = vRP.getUserId(source)
+	if vRP.hasPermission(user_id,"phone.bill") then
+		vRP.giveMoney(user_id,-50)
+		vRPclient.notify(source,{"You paid your phone bill"})
+	end																														
+end)
+

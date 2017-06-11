@@ -159,6 +159,17 @@ local lang = {
         tracking = "~b~Tracking started.",
         track_failed = "~b~Tracking of {1}~s~ ({2}) ~n~~r~Failed.",
         tracked = "Tracked {1} ({2})"
+      },
+      records = {
+        show = {
+          title = "Show records",
+          description = "Show police records by registration number."
+        },
+        delete = {
+          title = "Clear records",
+          description = "Clear police records by registration number.",
+          deleted = "~b~Police records deleted"
+        }
       }
     },
     menu = {
@@ -172,7 +183,11 @@ local lang = {
       },
       putinveh = {
         title = "Put in vehicle",
-        description = "Put the nearest person in the nearest vehicle, as passenger."
+        description = "Put nearest handcuffed person in car."
+      },
+      getoutveh = {
+        title = "Get out vehicle",
+        description = "Get out of vehicle the nearest handcuffed player."
       },
       askid = {
         title = "Ask for ID",
@@ -214,7 +229,8 @@ local lang = {
         title = "Fine",
         description = "Fine the nearest person.",
         fined = "~b~Fined ~s~{2} $ for ~b~{1}.",
-        notify_fined = "~b~You have been fined ~s~ {2} $ for ~b~{1}."
+        notify_fined = "~b~You have been fined ~s~ {2} $ for ~b~{1}.",
+        record = "[Fine] {2} $ for {1}"
       }
     },
     identity = {
@@ -343,6 +359,14 @@ local lang = {
       title = "Ask to open Trunk",
       asked = "~g~Asking...",
       request = "Do you want to open the trunk?"
+    },
+    replace = {
+      title = "Replace vehicle",
+      description = "Replace on ground the nearest vehicle."
+    },
+    repair = {
+      title = "Repair vehicle",
+      description = "Repair the nearest vehicle."
     }
   },
   gunshop = {

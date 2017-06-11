@@ -18,7 +18,7 @@ cfg.market_types = {
     ["orangejuice"] = 8,
     ["gocagola"] = 12,
     ["redgull"] = 12,
-    ["lemonlimonad"] = 14,
+    ["lemonade"] = 14,
     ["vodka"] = 30,
 
     --Food
@@ -45,6 +45,10 @@ cfg.market_types = {
     ["wine"] = 55,
     ["wings"] = 25
   }
+  -- ["tools"] = {
+  --   _config = {blipid=51, blipcolor=47},
+  --   ["repairkit"] = 50
+  -- }
 }
 
 

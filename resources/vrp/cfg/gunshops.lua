@@ -11,31 +11,24 @@ local cfg = {}
 cfg.gunshop_types = {
   ["weapons"] = {
     _config = {blipid=110,blipcolor=59},
-    ["WEAPON_BOTTLE"] = {"Bottle",1000,0,""},
-    ["WEAPON_BAT"] = {"Bat",1500,0,""},
-    ["WEAPON_KNUCKLE"] = {"Knuckle",1500,0,""},
-    ["WEAPON_KNIFE"] = {"Knife",2000,0,""},
-    ["WEAPON_PISTOL"] = {"Pistol",2500,15,""},
-    ["WEAPON_COMBATPISTOL"] = {"Combat Pistol",5000,15,""},
-    ["WEAPON_DAGGER"] = {"Dagger",2000,0,""},
-    ["WEAPON_HATCHET"] = {"Hatchet",3000,0,""},
-    ["WEAPON_SWITCHBLADE"] = {"Switch Blade",4000,0,""},
-    ["WEAPON_MACHETE"] = {"Machete",4500,0,""},
-    ["WEAPON_SNSPISTOL"] = {"Pistol",2500,15,""},
-    ["WEAPON_FLARE"] = {"Flare",200000,50,""},
-    ["WEAPON_FIREEXTINGUISHER"] = {"Fire Extinguisher",1000000,0,""},
-    ["WEAPON_SNOWBALL"] = {"SnowBall",3000000,0,""},
+    ["WEAPON_BAT"] = {"Bat",350,0,""},
+    ["WEAPON_KNIFE"] = {"Knife",500,0,""},
+    ["WEAPON_PISTOL"] = {"Pistol",5000,15,""},
+    ["WEAPON_COMBATPISTOL"] = {"Combat Pistol",5250,15,""},
+    ["WEAPON_DAGGER"] = {"Dagger",1000,0,""},
+    ["WEAPON_HATCHET"] = {"Hatchet",1500,0,""},
+    ["WEAPON_MACHETE"] = {"Machete",1250,0,""},
+    ["WEAPON_SNOWBALL"] = {"SnowBall",100,0,""},
     ["WEAPON_FLASHLIGHT"] = {"FlashLight",50000,0,""},
-    ["WEAPON_FLAREGUN"] = {"Flaregun",500000,0,""},
-    ["WEAPON_PETROLCAN"] = {"Petrol",50000,0,""}
   },
 
   ["blackmarket"] = {
     _config = {blipid=154,blipcolor=1},
-    ["WEAPON_MICROSMG"] = {"Uzi",50000,25,"Illegal Full Auto Weapon"}, --BlackMarket
-    ["WEAPON_MOLOTOV"] = {"Molotov",150000,45,"Illegal Throwable Fire Bottle"}, -- BlackMarket
-    ["WEAPON_SNIPERRIFLE"] = {"Sniper Rifle",200000,50,"Illegal Large Sniper Rifle"}, --BlackMarket
-    ["WEAPON_SAWNOFFSHOTGUN"] = {"Sawn-Off Shotgun",350000,65,"Illegal Sawn-Off Shotgun"} --BlackMarket
+    ["WEAPON_KNUCKLE"] = {"Knuckle",500,0,"It's legal... till you use it."},
+    ["WEAPON_MICROSMG"] = {"Uzi",25000,25,"Illegal Full Auto Weapon"}, --BlackMarket
+    ["WEAPON_MOLOTOV"] = {"Molotov",1000,45,"Illegal Throwable Fire Bottle"}, -- BlackMarket
+    ["WEAPON_SNIPERRIFLE"] = {"Sniper Rifle",350000,50,"Illegal Large Sniper Rifle"}, --BlackMarket
+    ["WEAPON_SAWNOFFSHOTGUN"] = {"Sawn-Off Shotgun",250000,65,"Illegal Sawn-Off Shotgun"} --BlackMarket
   }
 }
 

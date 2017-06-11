@@ -1,5 +1,4 @@
-
--- this file configure the cloakrooms on the map
+-- Config Cloakrooms
 
 local cfg = {}
 
@@ -13,17 +12,7 @@ cfg.cloakroom_types = {
       [8] = {58,0},
       [11] = {55,0}
     }
-  }
-}
-
--- Add More Models ^V
-
-cfg.cloakrooms = {
-  {"police", 457.196746826172,-990.949279785156,30.6896018981934} -- 440.222137451172,-993.352661132813,30.6896018981934
-}
-
--- cloakroom types (_config, map of name => customization)
-cfg.cloakroom_types = {
+  },
   ["ems"] = {
     _config = { permission = "ems.cloakroom" },
     ["Uniform"] = {
@@ -32,7 +21,10 @@ cfg.cloakroom_types = {
   }
 }
 
+
+-- Locations of Cloakrooms
 cfg.cloakrooms = {
+  {"police", 457.196746826172,-990.949279785156,30.6896018981934},
   {"ems", -499.195648193359,-342.909942626953,34.5018424987793}
 }
 

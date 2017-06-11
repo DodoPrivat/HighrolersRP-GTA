@@ -173,7 +173,7 @@ local function build_client_selectors(source)
         end
 
         vRPclient.addBlip(source,{x,y,z,gcfg.blipid,gcfg.blipcolor,k})
-        vRPclient.addMarker(source,{x,y,z-1,0.7,0.7,0.5,255,154,24,125,150})
+        vRPclient.addMarker(source,{x,y,z-1,1.5,1.5,0.5,255,154,24,125,150})
 
         vRP.setArea(source,"vRP:gselector:"..k,x,y,z,1,1.5,selector_enter,selector_leave)
       end

@@ -19,11 +19,19 @@ function tvRP.teleport(x,y,z)
   vRPserver.updatePos({x,y,z})
 end
 
+-- return x,y,z
 function tvRP.getPosition()
   local x,y,z = table.unpack(GetEntityCoords(GetPlayerPed(-1),true))
   return x,y,z
 end
 
+-- return false if in exterior, true if inside a building
+function tvRP.isInside()
+  local x,y,z = tvRP.getPosition()
+  return not (GetInteriorAtCoords(x,y,z) == 0)
+end
+
+-- return vx,vy,vz
 function tvRP.getSpeed()
   local vx,vy,vz = table.unpack(GetEntityVelocity(GetPlayerPed(-1)))
   return math.sqrt(vx*vx+vy*vy+vz*vz)
@@ -62,20 +70,6 @@ function tvRP.getNearestPlayers(radius)
   local ped = GetPlayerPed(i)
   local pid = PlayerId()
   local px,py,pz = tvRP.getPosition()
-
-  --[[
-  for i=0,GetNumberOfPlayers()-1 do
-    if i ~= pid then
-      local oped = GetPlayerPed(i)
-
-      local x,y,z = table.unpack(GetEntityCoords(oped,true))
-      local distance = GetDistanceBetweenCoords(x,y,z,px,py,pz,true)
-      if distance <= radius then
-        r[GetPlayerServerId(i)] = distance
-      end
-    end
-  end
-  --]]
 
   for k,v in pairs(players) do
     local player = GetPlayerFromServerId(k)
@@ -259,7 +253,6 @@ end
 -- events
 
 AddEventHandler("playerSpawned",function()
-  NetworkSetTalkerProximity(cfg.voice_proximity+0.0001)
   TriggerServerEvent("vRPcli:playerSpawned")
 end)
 
@@ -270,6 +263,4 @@ end)
 AddEventHandler("onPlayerKilled",function(player,killer,reason)
   TriggerServerEvent("vRPcli:playerDied")
 end)
-
-
 

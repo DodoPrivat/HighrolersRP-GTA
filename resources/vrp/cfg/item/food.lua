@@ -84,20 +84,20 @@ tea_choices["Drink"] = {function(player,choice)
 end}
 items["tea"] = {"Tea","",tea_choices,0.2}
 
--- create iceTea item
-local icetea_choices = {}
-icetea_choices["Drink"] = {function(player,choice)
+-- create Iced Tea item
+local icedtea_choices = {}
+icedtea_choices["Drink"] = {function(player,choice)
   local user_id = vRP.getUserId(player)
   if user_id ~= nil then
-    if vRP.tryGetInventoryItem(user_id,"icetea",1) then
+    if vRP.tryGetInventoryItem(user_id,"icedtea",1) then
       vRP.varyThirst(user_id,-20)
-      vRPclient.notify(player,{"~b~ Drinking ice-Tea."})
+      vRPclient.notify(player,{"~b~ Drinking Iced Tea."})
       play_drink(player)
       vRP.closeMenu(player)
     end
   end
 end}
-items["icetea"] = {"ice-Tea","",icetea_choices,0.5}
+items["icedtea"] = {"Iced Tea","",icedtea_choices,0.5}
 
 -- create Orange Juice item
 local orangejuice_choices = {}
@@ -106,7 +106,7 @@ orangejuice_choices["Drink"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"orangejuice",1) then
       vRP.varyThirst(user_id,-25)
-      vRPclient.notify(player,{"~b~ Drinking Orange Juice."})
+      vRPclient.notify(player,{"~b~ Drinking Orange Juice"})
       play_drink(player)
       vRP.closeMenu(player)
     end
@@ -144,20 +144,20 @@ redgull_choices["Drink"] = {function(player,choice)
 end}
 items["redgull"] = {"RedGull","",redgull_choices,0.3}
 
--- create Lemon limonad item
-local lemonlimonad_choices = {}
-lemonlimonad_choices["Drink"] = {function(player,choice)
+-- create Lemonade item
+local lemonade_choices = {}
+lemonade_choices["Drink"] = {function(player,choice)
   local user_id = vRP.getUserId(player)
   if user_id ~= nil then
-    if vRP.tryGetInventoryItem(user_id,"lemonlimonad",1) then
+    if vRP.tryGetInventoryItem(user_id,"lemonade",1) then
       vRP.varyThirst(user_id,-45)
-      vRPclient.notify(player,{"~b~ Drinking Lemon limonad."})
+      vRPclient.notify(player,{"~b~ Drinking Lemonade."})
       play_drink(player)
       vRP.closeMenu(player)
     end
   end
 end}
-items["lemonlimonad"] = {"Lemon limonad","",lemonlimonad_choices,0.3}
+items["lemonade"] = {"Lemonade","",lemonade_choices,0.3}
 
 -- create Vodka item
 local vodka_choices = {}
@@ -270,7 +270,7 @@ corn_choices["Eat"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"corn",1) then
       vRP.varyHunger(user_id,-20)
-      vRPclient.notify(player,{"~o~ Eating Corn."})
+      vRPclient.notify(player,{"~o~ Eating George's Soul."})
       play_eat(player)
       vRP.closeMenu(player)
     end
@@ -279,21 +279,35 @@ end}
 
 items["corn"] = {"Corn","",corn_choices,0.5}
 
--- create Wings item
+-- create wings item
 local wings_choices = {}
 wings_choices["Eat"] = {function(player,choice)
   local user_id = vRP.getUserId(player)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"wings",1) then
-      vRP.varyHunger(user_id,-20)
+      vRP.varyHunger(user_id,-15)
       vRPclient.notify(player,{"~o~ Eating Wings."})
       play_eat(player)
       vRP.closeMenu(player)
     end
   end
 end}
+items["wings"] = {"Wings","",wings_choices,0.5}
 
-items["Wings"] = {"Wings","",wings_choices,0.5}
+-- -- create Peaches item
+-- local peach_choices = {}
+-- peach_choices["Eat"] = {function(player,choice)
+--   local user_id = vRP.getUserId(player)
+--   if user_id ~= nil then
+--     if vRP.tryGetInventoryItem(user_id,"peach",1) then
+--       vRP.varyHunger(user_id,-25)
+--       vRPclient.notify(player,{"~o~ Eating Peaches."})
+--       play_eat(player)
+--       vRP.closeMenu(player)
+--     end
+--   end
+-- end}
+-- items["peach"] = {"Peaches","",peach_choices,0.2}
 
 -- create Donut item
 local donut_choices = {}
@@ -309,21 +323,6 @@ donut_choices["Eat"] = {function(player,choice)
   end
 end}
 items["donut"] = {"Donut","",donut_choices,0.2}
-
--- create Peach item
-local peach_choices = {}
-peach_choices["Eat"] = {function(player,choice)
-  local user_id = vRP.getUserId(player)
-  if user_id ~= nil then
-    if vRP.tryGetInventoryItem(user_id,"peach",1) then
-      vRP.varyHunger(user_id,-15)
-      vRPclient.notify(player,{"~o~ Eating Peach."})
-      play_eat(player)
-      vRP.closeMenu(player)
-    end
-  end
-end}
-items["peach"] = {"Peach","",peach_choices,0.2}
 
 -- create Tacos item
 local tacos_choices = {}
@@ -353,7 +352,6 @@ sd_choices["Eat"] = {function(player,choice)
     end
   end
 end}
-
 items["sandwich"] = {"Sandwich","A tasty snack.",sd_choices,0.8}
 
 -- create Kebab item
@@ -369,7 +367,6 @@ kebab_choices["Eat"] = {function(player,choice)
     end
   end
 end}
-
 items["kebab"] = {"Kebab","",kebab_choices,0.4}
 
 -- create Premium Donut item
@@ -385,7 +382,6 @@ pdonut_choices["Eat"] = {function(player,choice)
     end
   end
 end}
-
 items["pdonut"] = {"Premium Donut","",pdonut_choices,0.5}
 
 

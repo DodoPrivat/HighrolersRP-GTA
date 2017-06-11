@@ -24,35 +24,35 @@ AutoStartResources:
     - jscoreboard 
     - playerblips 
     - handsup 
-#    - drag
     - vehcontrol
     - pausemenu-title
     - NeverWanted
-#    - Driver
     - msq-directions-hud
     - NameTag
     - chat
     - lux_vehcontrol
+    - addition
+    - cruiseControl
     
 # do change
 RconPassword: dimdim
 
 # configure this, please
-Hostname: HighRolers RP -=WHITELISTED=-
+Hostname: HighRolers RP --TEST--
 
 ScriptDebug: true
 
 DebugLog: true
 
 # set to false to hide from the online server list
-Announce: true
+Announce: false
 
 # set to false to require players to be signed in to Steam
 DisableAuth: false
 
-# set to true to disable local script hook plugins
+# Set to true to disable ScriptHook
 DisableScriptHook: false
-# uncomment and set to the path of an icon to use in the server browser. it should be square.
+# Server Icon : Should be Squade
 ServerIcon: HighRolers2.png
 
 # don't try enabling this

@@ -4,8 +4,6 @@ cfg = {}
 
 cfg.iplload = true
 
-cfg.voice_proximity = 20.0 --50.0
-
 cfg.gui = {
   anchor_minimap_width = 260, --260
   anchor_minimap_left = 550, --60

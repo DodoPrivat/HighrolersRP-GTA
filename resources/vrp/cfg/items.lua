@@ -15,27 +15,38 @@ local function play_eat(player)
 
 -- idname = {name,description,choices}
 cfg.items = {
-  ["fruit_peche"] = {"Peach","A Peach.",{
+  ["peach"] = {"Peach","A Peach.",{
     ["Eat"] = {function(player,choice)
       local user_id = vRP.getUserId(player)
       if user_id ~= nil then
-        if vRP.tryGetInventoryItem(user_id,"fruit_peche",1) then
+        if vRP.tryGetInventoryItem(user_id,"peach",1) then
           vRP.varyHunger(user_id,-10)
           vRP.varyThirst(user_id,-10)
-          vRPclient.notify(player,{"~o~ Eat Peach."})
+          vRPclient.notify(player,{"~o~ Eating Peach."})
           play_eat(player)
           vRP.closeMenu(player)
         end
       end
     end}
-  }},
+  }
+},
 
 
-
+--Gold items
   ["gold_ore"] = {"Gold Ore","",{},4},
   ["gold_processed"] = {"Processed Gold","",{},3},
-  ["gold_ingot"] = {"Gold Ingot","",{},2}
-  -- items["breed"] = {"Bread","",breed_choices,0.5}
+  ["gold_ingot"] = {"Gold Ingot","",{},2},
+--Meth items
+  ["Nail Polish Remover"] = {"Nail Polish Remover","",{},0.1},
+  ["Window Cleaner"] = {"Window Cleaner","",{},1.0},
+  ["Cold Medicine"] = {"Cold Medicine","",{},0.3},
+  ["Hydrochloic Acid"] = {"Hydrochloic Acid","",{},1.0},
+  ["Box of Matches"] = {"Box of Matches","",{},0.1},
+  ["Brake Fluid"] = {"Brake Fluid","",{},1.0},
+  ["lye"] = {"lye","",{},0.3},
+  ["Drain Cleaner"]= {"Drain Cleaner","",{},0.3},
+--Phones
+  ["brokia"]= {"Brokia Phone","",{},0.0}
 }
 
 -- load more items function

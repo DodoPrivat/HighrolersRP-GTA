@@ -12,13 +12,13 @@ cfg.item_transformers = {
     units_per_minute=5000,
     x=-2268.099609375,y=-31.0390892028809,z=112.193695068359,
     radius=15, height=4,
-    action="Gathering...",
+    action="Gather",
     description="Gather Peaches",
     in_money=0,
     out_money=0,
     reagents={},
     products={
-      ["fruit_peche"] = 3
+      ["peach"] = 3
     }
   },
   {
@@ -33,7 +33,7 @@ cfg.item_transformers = {
     in_money=0,
     out_money=25,
     reagents = {
-      ["fruit_peche"] = 5
+      ["peach"] = 5
     },
     products={}
   },
@@ -107,6 +107,31 @@ cfg.item_transformers = {
       ["weed"] = 1
     }
   },
+   {
+    name="Meth Lab",
+    r=255,g=255,b=0,
+    max_units=80,
+    units_per_minute=3,
+    x=1391.26953125,y=3607.48168945313,z=38.9419097900391,
+    radius=3,height=4,
+    action="Cook Meth",
+    description="Cook Meth.",
+    in_money=0,
+    out_money=0,
+    reagents={
+      ["Nail Polish Remover"] = 1,
+      ["Window Cleaner"] = 1,
+      ["Cold Medicine"] = 1,
+      ["Hydrochloic Acid "] = 1,
+      ["Box of Matches"] = 1,
+      ["Brake Fluid"] = 1,
+      ["lye"] = 1,
+      ["Drain Cleaner"] =1
+    },
+    products={
+      ["Meth"] = 8
+    }
+  },
     {
     name="Dealer",
     r=255,g=255,b=0,
@@ -117,9 +142,9 @@ cfg.item_transformers = {
     action="Sell",
     description="Sell Weed",
     in_money=0,
-    out_money=400,
+    out_money=0,
     reagents={
-      -- ["weed"] = 2,
+      ["weed"] = 2,
     },
     products={
     ["dirty_money"] = 400
@@ -154,7 +179,7 @@ cfg.hidden_transformers = {
       x=0,y=0,z=0, -- pos
       radius=30, height=1.5, -- area
       action="Harvest", -- action name
-      description="Harvest some harvest.", -- action description
+      description="Harvest Marijuana.", -- action description
       in_money=0, -- money taken per unit
       out_money=0, -- money earned per unit
       reagents={}, -- items taken per unit

@@ -3,6 +3,17 @@
 local lang = vRP.lang
 local cfg = require("resources/vrp/cfg/police")
 
+-- police records
+
+-- insert a police record for a specific user
+--- line: text for one line (can be html)
+function vRP.insertPoliceRecord(user_id, line)
+  if user_id ~= nil then
+    local records = vRP.getUData(user_id, "vRP:police_records")..line.."<br />"
+    vRP.setUData(user_id, "vRP:police_records", records)
+  end
+end
+
 -- police PC
 
 local menu_pc = {name=lang.police.pc.title(),css={top="75px",header_color="rgba(0,125,255,0.75)"}}
@@ -38,10 +49,36 @@ local function ch_searchreg(player,choice)
         end
 
         local content = lang.police.identity.info({name,firstname,age,registration,phone,bname,bcapital,home,number})
-        vRPclient.setDiv(player,{"police_identity",".div_police_identity{ background-color: rgba(0,0,0,0.75); color: white; font-weight: bold; width: 500px; padding: 10px; margin: auto; margin-top: 150px; }",content})
+        vRPclient.setDiv(player,{"police_pc",".div_police_pc{ background-color: rgba(0,0,0,0.75); color: white; font-weight: bold; width: 500px; padding: 10px; margin: auto; margin-top: 150px; }",content})
       else
         vRPclient.notify(player,{lang.common.not_found()})
       end
+    else
+      vRPclient.notify(player,{lang.common.not_found()})
+    end
+  end)
+end
+
+-- show police records by registration
+local function ch_show_police_records(player,choice)
+  vRP.prompt(player,lang.police.pc.searchreg.prompt(),"",function(player, reg)
+    local user_id = vRP.getUserByRegistration(reg)
+    if user_id ~= nil then
+      local content = vRP.getUData(user_id, "vRP:police_records")
+      vRPclient.setDiv(player,{"police_pc",".div_police_pc{ background-color: rgba(0,0,0,0.75); color: white; font-weight: bold; width: 500px; padding: 10px; margin: auto; margin-top: 150px; }",content})
+    else
+      vRPclient.notify(player,{lang.common.not_found()})
+    end
+  end)
+end
+
+-- delete police records by registration
+local function ch_delete_police_records(player,choice)
+  vRP.prompt(player,lang.police.pc.searchreg.prompt(),"",function(player, reg)
+    local user_id = vRP.getUserByRegistration(reg)
+    if user_id ~= nil then
+      vRP.setUData(user_id, "vRP:police_records", "")
+      vRPclient.notify(player,{lang.police.pc.records.delete.deleted()})
     else
       vRPclient.notify(player,{lang.common.not_found()})
     end
@@ -71,42 +108,14 @@ local function ch_closebusiness(player,choice)
   end)
 end
 
--- -- track vehicle
--- local function ch_trackveh(player,choice)
---   vRP.prompt(player,lang.police.pc.trackveh.prompt_reg(),"",function(player, reg) -- ask reg
---     local user_id = vRP.getUserByRegistration(reg)
---     if user_id ~= nil then
---       vRP.prompt(player,lang.police.pc.trackveh.prompt_note(),"",function(player, note) -- ask note
---         -- begin veh tracking
---         vRPclient.notify(player,{lang.police.pc.trackveh.tracking()})
---         local seconds = math.random(cfg.trackveh.min_time,cfg.trackveh.max_time)
---         SetTimeout(seconds*1000,function()
---           local tplayer = vRP.getUserSource(user_id)
---           if tplayer ~= nil then
---             vRPclient.getOwnedVehiclePosition(tplayer,{},function(ok,x,y,z)
---               if ok then -- track success
---                 vRP.sendServiceAlert(nil, cfg.trackveh.service,x,y,z,lang.police.pc.trackveh.tracked({reg,note}))
---               else
---                 vRPclient.notify(player,{lang.police.pc.trackveh.track_failed({reg,note})}) -- failed
---               end
---             end)
---           else
---             vRPclient.notify(player,{lang.police.pc.trackveh.track_failed({reg,note})}) -- failed
---           end
---         end)
---       end)
---     else
---       vRPclient.notify(player,{lang.common.not_found()})
---     end
---   end)
--- end
-
 menu_pc[lang.police.pc.searchreg.title()] = {ch_searchreg,lang.police.pc.searchreg.description()}
 -- menu_pc[lang.police.pc.trackveh.title()] = {ch_trackveh,lang.police.pc.trackveh.description()}
+menu_pc[lang.police.pc.records.show.title()] = {ch_show_police_records,lang.police.pc.records.show.description()}
+menu_pc[lang.police.pc.records.delete.title()] = {ch_delete_police_records, lang.police.pc.records.delete.description()}
 menu_pc[lang.police.pc.closebusiness.title()] = {ch_closebusiness,lang.police.pc.closebusiness.description()}
 
 menu_pc.onclose = function(player) -- close pc gui
-  vRPclient.removeDiv(player,{"police_identity"})
+  vRPclient.removeDiv(player,{"police_pc"})
 end
 
 local function pc_enter(source,area)
@@ -134,29 +143,68 @@ local choice_handcuff = {function(player,choice)
   end)
 end,lang.police.menu.handcuff.description()}
 
----- drag
-local choice_drag = {function(player,choice)----
-  vRPclient.getNearestPlayer(player,{10},function(nplayer)
-    local nuser_id = vRP.getUserId(nplayer)
-    if nuser_id ~= nil then
-      vRPclient.drag(nplayer,{})
-    else
-      vRPclient.notify(player,{lang.common.no_player_near()})
-    end
-  end)----
-end,lang.police.menu.drag.description()}----
-
 ---- putinveh
+--[[
+-- veh at position version
 local choice_putinveh = {function(player,choice)
   vRPclient.getNearestPlayer(player,{10},function(nplayer)
     local nuser_id = vRP.getUserId(nplayer)
     if nuser_id ~= nil then
-      vRPclient.putInNearestVehicleAsPassenger(nplayer,{5})
+      vRPclient.isHandcuffed(nplayer,{}, function(handcuffed)  -- check handcuffed
+        if handcuffed then
+          vRPclient.getNearestOwnedVehicle(player, {10}, function(ok,vtype,name) -- get nearest owned vehicle
+            if ok then
+              vRPclient.getOwnedVehiclePosition(player, {vtype}, function(x,y,z)
+                vRPclient.putInVehiclePositionAsPassenger(nplayer,{x,y,z}) -- put player in vehicle
+              end)
+            else
+              vRPclient.notify(player,{lang.vehicle.no_owned_near()})
+            end
+          end)
+        else
+          vRPclient.notify(player,{lang.police.not_handcuffed()})
+        end
+      end)
     else
       vRPclient.notify(player,{lang.common.no_player_near()})
     end
   end)
 end,lang.police.menu.putinveh.description()}
+--]]
+
+local choice_putinveh = {function(player,choice)
+  vRPclient.getNearestPlayer(player,{10},function(nplayer)
+    local nuser_id = vRP.getUserId(nplayer)
+    if nuser_id ~= nil then
+      vRPclient.isHandcuffed(nplayer,{}, function(handcuffed)  -- check handcuffed
+        if handcuffed then
+          vRPclient.putInNearestVehicleAsPassenger(nplayer, {5})
+        else
+          vRPclient.notify(player,{lang.police.not_handcuffed()})
+        end
+      end)
+    else
+      vRPclient.notify(player,{lang.common.no_player_near()})
+    end
+  end)
+end,lang.police.menu.putinveh.description()}
+
+local choice_getoutveh = {function(player,choice)
+  vRPclient.getNearestPlayer(player,{10},function(nplayer)
+    local nuser_id = vRP.getUserId(nplayer)
+    if nuser_id ~= nil then
+      vRPclient.isHandcuffed(nplayer,{}, function(handcuffed)  -- check handcuffed
+        if handcuffed then
+          vRPclient.ejectVehicle(nplayer, {})
+        else
+          vRPclient.notify(player,{lang.police.not_handcuffed()})
+        end
+      end)
+    else
+      vRPclient.notify(player,{lang.common.no_player_near()})
+    end
+  end)
+end,lang.police.menu.getoutveh.description()}
 
 ---- askid
 local choice_askid = {function(player,choice)
@@ -353,7 +401,7 @@ local choice_fine = {function(player, choice)
     vRPclient.getNearestPlayer(player, {5}, function(nplayer)
       local nuser_id = vRP.getUserId(nplayer)
       if nuser_id ~= nil then
-        local money = vRP.getMoney(nuser_id)
+        local money = vRP.getMoney(nuser_id)+vRP.getBankMoney(nuser_id)
 
         -- build fine menu
         local menu = {name=lang.police.menu.fine.title(),css={top="75px",header_color="rgba(0,125,255,0.75)"}}
@@ -361,7 +409,8 @@ local choice_fine = {function(player, choice)
         local choose = function(player,choice) -- fine action
           local amount = cfg.fines[choice]
           if amount ~= nil then
-            if vRP.tryPayment(nuser_id, amount) then
+            if vRP.tryFullPayment(nuser_id, amount) then
+              vRP.insertPoliceRecord(nuser_id, lang.police.menu.fine.record({choice,amount}))
               vRPclient.notify(player,{lang.police.menu.fine.fined({choice,amount})})
               vRPclient.notify(nplayer,{lang.police.menu.fine.notify_fined({choice,amount})})
               vRP.closeMenu(player)
@@ -395,12 +444,12 @@ AddEventHandler("vRP:buildMainMenu",function(player)
       choices[lang.police.menu.handcuff.title()] = choice_handcuff
     end
 
-    if vRP.hasPermission(user_id,"police.drag") then----
-      choices[lang.police.menu.drag.title()] = choice_drag----
-    end----
-
     if vRP.hasPermission(user_id,"police.putinveh") then
       choices[lang.police.menu.putinveh.title()] = choice_putinveh
+    end
+
+    if vRP.hasPermission(user_id,"police.getoutveh") then
+      choices[lang.police.menu.getoutveh.title()] = choice_getoutveh
     end
 
     if vRP.hasPermission(user_id,"police.askid") then
@@ -434,7 +483,7 @@ end)
 local function build_client_points(source)
   -- PC
   local x,y,z = table.unpack(cfg.pc)
-  vRPclient.addMarker(source,{x,y,z-1,2.5,2.5,0.5,0,125,255,125,150})
+  vRPclient.addMarker(source,{x,y,z-1,1.5,1.5,0.5,0,125,255,125,150})
   vRP.setArea(source,"vRP:police:pc",x,y,z,1,1.5,pc_enter,pc_leave)
 end
 
@@ -444,60 +493,3 @@ AddEventHandler("vRP:playerSpawn",function(user_id, source, first_spawn)
     build_client_points(source)
   end
 end)
-
--- -- WANTED SYNC
-
--- local wantedlvl_players = {}
-
--- function vRP.getUserWantedLevel(user_id)
---   return wantedlvl_players[user_id] or 0
--- end
-
--- -- receive wanted level
--- function tvRP.updateWantedLevel(level)
---   local player = source
---   local user_id = vRP.getUserId(player)
---   if user_id ~= nil then
---     local was_wanted = (vRP.getUserWantedLevel(user_id) > 0)
---     wantedlvl_players[user_id] = level
---     local is_wanted = (level > 0)
-
---     -- send wanted to listening service
---     if not was_wanted and is_wanted then
---       vRPclient.getPosition(player, {}, function(x,y,z)
---         vRP.sendServiceAlert(nil, cfg.wanted.service,x,y,z,lang.police.wanted({level}))
---       end)
---     end
-
---     if was_wanted and not is_wanted then
---       vRPclient.removeNamedBlip(-1, {"vRP:wanted:"..user_id}) -- remove wanted blip (all to prevent phantom blip)
---     end
---   end
--- end
-
--- -- delete wanted entry on leave
--- AddEventHandler("vRP:playerLeave", function(user_id, player)
---   wantedlvl_players[user_id] = nil
---   vRPclient.removeNamedBlip(-1, {"vRP:wanted:"..user_id})  -- remove wanted blip (all to prevent phantom blip)
--- end)
-
--- -- display wanted positions
--- local function task_wanted_positions()
---   local listeners = vRP.getUsersByPermission("police.wanted")
---   for k,v in pairs(wantedlvl_players) do -- each wanted player
---     local player = vRP.getUserSource(tonumber(k))
---     if player ~= nil and v ~= nil and v > 0 then
---       vRPclient.getPosition(player, {}, function(x,y,z)
---         for l,w in pairs(listeners) do -- each listening player
---           local lplayer = vRP.getUserSource(w)
---           if lplayer ~= nil then
---             vRPclient.setNamedBlip(lplayer, {"vRP:wanted:"..k,x,y,z,cfg.wanted.blipid,cfg.wanted.blipcolor,lang.police.wanted({v})})
---           end
---         end
---       end)
---     end
---   end
-
---   SetTimeout(5000, task_wanted_positions)
--- end
--- task_wanted_positions()

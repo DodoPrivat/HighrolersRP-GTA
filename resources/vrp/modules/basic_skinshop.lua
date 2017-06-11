@@ -149,7 +149,7 @@ local function build_client_skinshops(source)
       end
 
       vRPclient.addBlip(source,{x,y,z,73,3,lang.skinshop.title()})
-      vRPclient.addMarker(source,{x,y,z-1,2.5,2.5,0.5,0,255,125,125,150})
+      vRPclient.addMarker(source,{x,y,z-1,1.5,1.5,0.5,0,255,125,125,150})
 
       vRP.setArea(source,"vRP:skinshop"..k,x,y,z,1,1.5,skinshop_enter,skinshop_leave)
     end
