@@ -12,7 +12,9 @@ CREATE TABLE IF NOT EXISTS vrp_user_vehicles(
 q_init:execute()
 
 local q_add_vehicle = vRP.sql:prepare("INSERT IGNORE INTO vrp_user_vehicles(user_id,vehicle) VALUES(@user_id,@vehicle)")
+local q_remove_vehicle = vRP.sql:prepare("DELETE FROM vrp_user_vehicles WHERE user_id = @user_id AND vehicle = @vehicle")
 local q_get_vehicles = vRP.sql:prepare("SELECT vehicle FROM vrp_user_vehicles WHERE user_id = @user_id")
+local q_get_vehicle = vRP.sql:prepare("SELECT vehicle FROM vrp_user_vehicles WHERE user_id = @user_id AND vehicle = @vehicle")
 
 -- load config
 
@@ -121,6 +123,68 @@ for group,vehicles in pairs(vehicle_groups) do
     end
   end,lang.garage.buy.description()}
 
+  menu[lang.garage.sell.title()] = {function(player,choice)
+    local user_id = vRP.getUserId(player)
+    if user_id ~= nil then
+
+      -- build nested menu
+      local kitems = {}
+      local submenu = {name=lang.garage.title({lang.garage.sell.title()}), css={top="75px",header_color="rgba(255,125,0,0.75)"}}
+      submenu.onclose = function()
+        vRP.openMenu(player,menu)
+      end
+
+      local choose = function(player, choice)
+        local vname = kitems[choice]
+        if vname then
+          -- sell vehicle
+          local vehicle = vehicles[vname]
+          if vehicle then
+            local price = math.ceil(vehicle[2]*cfg.sell_factor)
+
+            q_get_vehicle:bind("@user_id",user_id)
+            q_get_vehicle:bind("@vehicle",vname)
+            local result = q_get_vehicle:query():toTable()
+            local has_vehicle = #vehicle > 0
+
+            if has_vehicle then
+              vRP.giveMoney(user_id,price)
+              q_remove_vehicle:bind("@user_id",user_id)
+              q_remove_vehicle:bind("@vehicle",vname)
+              q_remove_vehicle:execute()
+
+              vRPclient.notify(player,{lang.money.received({price})})
+              vRP.closeMenu(player)
+            else
+              vRPclient.notify(player,{lang.common.not_found()})
+            end
+          end
+        end
+      end
+      
+      -- get player owned vehicles (indexed by vehicle type name in lower case)
+      q_get_vehicles:bind("@user_id",user_id)
+      local _pvehicles = q_get_vehicles:query():toTable()
+      local pvehicles = {}
+      for k,v in pairs(_pvehicles) do
+        pvehicles[string.lower(v.vehicle)] = true
+      end
+
+      -- for each existing vehicle in the garage group
+      for k,v in pairs(pvehicles) do
+        local vehicle = vehicles[k]
+        if vehicle then -- not already owned
+          local price = math.ceil(vehicle[2]*cfg.sell_factor)
+          submenu[vehicle[1]] = {choose,lang.garage.buy.info({price,vehicle[3]})}
+          kitems[vehicle[1]] = k
+        end
+      end
+
+      vRP.openMenu(player,submenu)
+    end
+  end,lang.garage.sell.description()}
+
+
   menu[lang.garage.store.title()] = {function(player,choice)
     vRPclient.despawnGarageVehicle(player,{veh_type,10}) -- big range cause the car to not despawn
   end, lang.garage.store.description()}
@@ -190,12 +254,31 @@ veh_actions[lang.vehicle.detach_trailer.title()] = {function(user_id,player,vtyp
   vRPclient.vc_detachTrailer(player, {vtype})
 end, lang.vehicle.detach_trailer.description()}
 
+-- detach towtruck
+veh_actions[lang.vehicle.detach_towtruck.title()] = {function(user_id,player,vtype,name)
+  vRPclient.vc_detachTowTruck(player, {vtype})
+end, lang.vehicle.detach_towtruck.description()}
+
+-- detach cargobob
+veh_actions[lang.vehicle.detach_cargobob.title()] = {function(user_id,player,vtype,name)
+  vRPclient.vc_detachCargobob(player, {vtype})
+end, lang.vehicle.detach_cargobob.description()}
+
+-- lock/unlock
+veh_actions[lang.vehicle.lock.title()] = {function(user_id,player,vtype,name)
+  vRPclient.vc_toggleLock(player, {vtype})
+end, lang.vehicle.lock.description()}
+
+-- engine on/off
+veh_actions[lang.vehicle.engine.title()] = {function(user_id,player,vtype,name)
+  vRPclient.vc_toggleEngine(player, {vtype})
+end, lang.vehicle.engine.description()}
 
 local function ch_vehicle(player,choice)
   local user_id = vRP.getUserId(player)
   if user_id ~= nil then
     -- check vehicle
-    vRPclient.getNearestOwnedVehicle(player,{},function(ok,vtype,name)
+    vRPclient.getNearestOwnedVehicle(player,{7},function(ok,vtype,name)
       if ok then
         -- build vehicle menu
         local menu = {name=lang.vehicle.title(), css={top="75px",header_color="rgba(255,125,0,0.75)"}}
@@ -220,7 +303,7 @@ local function ch_asktrunk(player,choice)
       vRPclient.notify(player,{lang.vehicle.asktrunk.asked()})
       vRP.request(nplayer,lang.vehicle.asktrunk.request(),15,function(nplayer,ok)
         if ok then -- request accepted, open trunk
-          vRPclient.getNearestOwnedVehicle(player,{},function(ok,vtype,name)
+          vRPclient.getNearestOwnedVehicle(nplayer,{7},function(ok,vtype,name)
             if ok then
               local chestname = "u"..nuser_id.."veh_"..string.lower(name)
               local max_weight = cfg_inventory.vehicle_chest_weights[string.lower(name)] or cfg_inventory.default_vehicle_chest_weight
@@ -275,17 +358,6 @@ local function ch_replace(player,choice)
   vRPclient.replaceNearestVehicle(player,{7})
 end
 
--- add repair functions
-  if vRP.hasPermission(user_id, "vehicle.repair") then
-     choices[lang.vehicle.repair.title()] = {ch_repair, lang.vehicle.repair.description()}
-  end
-
-  if vRP.hasPermission(user_id, "vehicle.replace") then
-     choices[lang.vehicle.replace.title()] = {ch_replace, lang.vehicle.replace.description()}
-  end
-
-
-
 AddEventHandler("vRP:buildMainMenu",function(player)
   local user_id = vRP.getUserId(player)
   if user_id ~= nil then
@@ -295,6 +367,15 @@ AddEventHandler("vRP:buildMainMenu",function(player)
 
     -- add ask trunk
     choices[lang.vehicle.asktrunk.title()] = {ch_asktrunk}
+
+    -- add repair functions
+   if vRP.hasPermission(user_id, "vehicle.repair") then
+     choices[lang.vehicle.repair.title()] = {ch_repair, lang.vehicle.repair.description()}
+   end
+
+   if vRP.hasPermission(user_id, "vehicle.replace") then
+     choices[lang.vehicle.replace.title()] = {ch_replace, lang.vehicle.replace.description()}
+   end
 
     vRP.buildMainMenu(player,choices)
   end

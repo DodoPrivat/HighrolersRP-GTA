@@ -109,7 +109,6 @@ local function ch_closebusiness(player,choice)
 end
 
 menu_pc[lang.police.pc.searchreg.title()] = {ch_searchreg,lang.police.pc.searchreg.description()}
--- menu_pc[lang.police.pc.trackveh.title()] = {ch_trackveh,lang.police.pc.trackveh.description()}
 menu_pc[lang.police.pc.records.show.title()] = {ch_show_police_records,lang.police.pc.records.show.description()}
 menu_pc[lang.police.pc.records.delete.title()] = {ch_delete_police_records, lang.police.pc.records.delete.description()}
 menu_pc[lang.police.pc.closebusiness.title()] = {ch_closebusiness,lang.police.pc.closebusiness.description()}
@@ -142,6 +141,18 @@ local choice_handcuff = {function(player,choice)
     end
   end)
 end,lang.police.menu.handcuff.description()}
+
+-- ---- drag
+-- local choice_drag = {function(player,choice)
+--   vRPclient.getNearestPlayer(player,{10},function(nplayer)
+--     local nuser_id = vRP.getUserId(nplayer)
+--     if nuser_id ~= nil then
+--       vRPclient.drag(nplayer,{})
+--     else
+--       vRPclient.notify(player,{lang.common.no_player_near()})
+--     end
+--   end)
+-- end,lang.police.menu.drag.description()}
 
 ---- putinveh
 --[[
@@ -442,6 +453,10 @@ AddEventHandler("vRP:buildMainMenu",function(player)
     local choices = {}
     if vRP.hasPermission(user_id,"police.handcuff") then
       choices[lang.police.menu.handcuff.title()] = choice_handcuff
+    end
+
+    if vRP.hasPermission(user_id,"police.drag") then
+      choices[lang.police.menu.drag.title()] = choice_drag
     end
 
     if vRP.hasPermission(user_id,"police.putinveh") then

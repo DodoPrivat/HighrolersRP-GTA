@@ -24,7 +24,7 @@ cfg.services = {
     alert_permission = "police.service",
     alert_notify = "~r~Police alert:~n~~s~",
     notify = "~b~You called the police.",
-    answer_notify = "~b~The police is coming."
+    answer_notify = "~b~The police are coming."
   },
   ["EMS"] = {
     blipid = 153,
@@ -32,8 +32,17 @@ cfg.services = {
     alert_time = 300, -- 5 minutes
     alert_permission = "emergency.service",
     alert_notify = "~r~Emergency alert:~n~~s~",
-    notify = "~b~You called the emergencies.",
-    answer_notify = "~b~The emergencies are coming."
+    notify = "~b~You called the EMS",
+    answer_notify = "~b~EMS are coming."
+  },
+  ["News"] = {
+    blipid = 153,
+    blipcolor = 1,
+    alert_time = 300, -- 5 minutes
+    alert_permission = "news.service",
+    alert_notify = "~r~News alert:~n~~s~",
+    notify = "~b~You called Weasel News",
+    answer_notify = "~b~Weasel News is on the way!"
   },
   ["Taxi"] = {
     blipid = 198,
@@ -44,7 +53,7 @@ cfg.services = {
     notify = "~y~You called a taxi.",
     answer_notify = "~y~A taxi is coming."
   },
-  ["repair"] = {
+  ["Tow"] = {
     blipid = 446,
     blipcolor = 5,
     alert_time = 300,

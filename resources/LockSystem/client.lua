@@ -35,7 +35,7 @@ local playSound = true -- Put on false for disable sound when Lock/Unlock (To ch
 -- Initialisation des variables
 local lastCar, posCar = 0
 
-
+--
 -- Thread principal
 Citizen.CreateThread(function() 
     while true do 
@@ -60,7 +60,13 @@ Citizen.CreateThread(function()
                     if chatMessage then
                         TriggerEvent("chatMessage", "Error", {255, 0, 0}, "This is not your vehicle!")
                     elseif not chatMessage then
-                        TriggerEvent("locksystem:notify", "This is not your vehicle!.")
+        TriggerEvent("pNotify:SendNotification", {
+            text = "This is not your vehicle!",
+            type = "error",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "right"
+        })
                     end
 
                 end
@@ -84,7 +90,13 @@ Citizen.CreateThread(function()
                             if chatMessage then
                                 TriggerEvent("chatMessage", "Info", {0, 255, 0}, "Vehicle Locked.")
                             elseif not chatMessage then
-                                TriggerEvent("locksystem:notify", "Vehicle Locked.")
+                            TriggerEvent("pNotify:SendNotification", {
+                                text = "Vehicle Locked",
+                                type = "warning",
+                                timeout = math.random(1000, 10000),
+                                layout = "centerRight",
+                                queue = "right"
+                            })
                             end
 
                             if playSound then
@@ -106,7 +118,13 @@ Citizen.CreateThread(function()
                             if chatMessage then
                                 TriggerEvent("chatMessage", "Info", {0, 255, 0}, "Vehicle Unlocked.")
                             elseif not chatMessage then
-                                TriggerEvent("locksystem:notify", "Vehicle Unlocked.")
+                           TriggerEvent("pNotify:SendNotification", {
+                               text = "Vehicle Unlocked",
+                               type = "success",
+                               timeout = math.random(1000, 10000),
+                               layout = "centerRight",
+                               queue = "right"
+                           })
                             end
 
                             if playSound then
@@ -122,7 +140,13 @@ Citizen.CreateThread(function()
                     if chatMessage then
                         TriggerEvent("chatMessage", "Error", {255, 0, 0}, "You are too far from the vehicle.")
                     elseif not chatMessage then
-                        TriggerEvent("locksystem:notify", "You are too far from the vehicle.")
+                   TriggerEvent("pNotify:SendNotification", {
+                       text = "Too far away from Vehicle!",
+                       type = "error",
+                       timeout = math.random(1000, 10000),
+                       layout = "centerRight",
+                       queue = "right"
+                   })
                     end
 
                 end
@@ -140,13 +164,13 @@ function GetPosition(lastCar, player)
     return
 end
 
-RegisterNetEvent("locksystem:notify")
-AddEventHandler("locksystem:notify", function(text)
-  Citizen.CreateThread(function()
-    Wait(1)
-    SetNotificationTextEntry("STRING");
-    AddTextComponentString(text);
-    Citizen.InvokeNative(0x1E6611149DB3DB6B, "CHAR_LIFEINVADER", "CHAR_LIFEINVADER", true, 1, "LockSystem", "Version 1.0", 0.070);
-    DrawNotification_4(false, true);
-    end)
-end)
+-- RegisterNetEvent("locksystem:notify")
+-- AddEventHandler("locksystem:notify", function(text)
+--   Citizen.CreateThread(function()
+--     Wait(1)
+--     SetNotificationTextEntry("STRING");
+--     AddTextComponentString(text);
+--     Citizen.InvokeNative(0x1E6611149DB3DB6B, "CHAR_LIFEINVADER", "CHAR_LIFEINVADER", true, 1, "LockSystem", "Version 1.0", 0.070);
+--     DrawNotification_4(false, true);
+--     end)
+-- end)

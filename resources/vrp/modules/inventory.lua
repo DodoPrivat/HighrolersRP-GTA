@@ -37,7 +37,7 @@ function vRP.defInventoryItem(idname,name,description,choices,weight)
           if nuser_id ~= nil then
             -- prompt number
             vRP.prompt(player,lang.inventory.give.prompt({vRP.getInventoryItemAmount(user_id,idname)}),"",function(player,amount)
-              local amount = tonumber(amount)
+              local amount = parseInt(amount)
               -- weight check
               local new_weight = vRP.getInventoryWeight(nuser_id)+vRP.items[idname].weight*amount
               if new_weight <= cfg.inventory_weight then
@@ -45,6 +45,9 @@ function vRP.defInventoryItem(idname,name,description,choices,weight)
                   vRP.giveInventoryItem(nuser_id,idname,amount)
                   vRPclient.notify(player,{lang.inventory.give.given({name,amount})})
                   vRPclient.notify(nplayer,{lang.inventory.give.received({name,amount})})
+
+                  vRPclient.playAnim(player,{true,{{"mp_common","givetake1_a",1}},false})
+                  vRPclient.playAnim(nplayer,{true,{{"mp_common","givetake2_a",1}},false})
                 else
                   vRPclient.notify(player,{lang.common.invalid_value()})
                 end
@@ -68,15 +71,23 @@ function vRP.defInventoryItem(idname,name,description,choices,weight)
     if user_id ~= nil then
       -- prompt number
       vRP.prompt(player,lang.inventory.trash.prompt({vRP.getInventoryItemAmount(user_id,idname)}),"",function(player,amount)
-        local amount = tonumber(amount)
+        local amount = parseInt(amount)
         if vRP.tryGetInventoryItem(user_id,idname,amount) then
           vRPclient.notify(player,{lang.inventory.trash.done({name,amount})})
+          vRPclient.playAnim(player,{true,{{"pickup_object","pickup_low",1}},false})
         else
           vRPclient.notify(player,{lang.common.invalid_value()})
         end
       end)
     end
   end,lang.inventory.trash.description()}
+end
+
+-- return item name or idname if not found
+function vRP.getItemName(idname)
+  local item = vRP.items[idname]
+  if item then return item.name end
+  return idname
 end
 
 -- compute weight of a list of items (in inventory/chest format)
@@ -279,7 +290,7 @@ function vRP.openChest(source, name, max_weight, cb_close, cb_in, cb_out)
         local cb_take = function(idname)
           local citem = chest.items[idname]
           vRP.prompt(source, lang.inventory.chest.take.prompt({citem.amount}), "", function(player, amount)
-            amount = tonumber(amount)
+            amount = parseInt(amount)
             if amount >= 0 and amount <= citem.amount then
               -- take item
               
@@ -323,7 +334,7 @@ function vRP.openChest(source, name, max_weight, cb_close, cb_in, cb_out)
         -- put
         local cb_put = function(idname)
           vRP.prompt(source, lang.inventory.chest.put.prompt({vRP.getInventoryItemAmount(user_id, idname)}), "", function(player, amount)
-            amount = tonumber(amount)
+            amount = parseInt(amount)
 
             -- weight check
             local new_weight = vRP.computeItemsWeight(chest.items)+vRP.items[idname].weight*amount

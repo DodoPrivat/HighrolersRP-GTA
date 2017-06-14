@@ -39,7 +39,13 @@ pills_choices["Take"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"pills",1) then
       vRPclient.varyHealth(player,{25})
-      vRPclient.notify(player,{"~g~ Taking pills."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Taking a Pill",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_drink(player)
       vRP.closeMenu(player)
     end
@@ -56,7 +62,13 @@ weed_choices["Smoke"] = {function(player,choice)
     if vRP.tryGetInventoryItem(user_id,"weed",1) then
       vRP.varyThirst(user_id, 5)
       vRP.varyHunger(user_id, 20)
-      vRPclient.notify(player,{"~b~ Smoking Weed."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Smoking Weed",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       vRPclient.playScreenEffect(player,{"DrugsTrevorClownsFight",3*60})
       play_smoke(player)
       vRP.closeMenu(player)
@@ -74,7 +86,13 @@ marijuana_choices["Eat?"] = {function(player,choice)
       vRPclient.varyHealth(player,{-5})
       vRP.varyThirst(user_id, 2)
       vRP.varyHunger(user_id, 8.5)
-      vRPclient.notify(player,{"~b~Eating Raw Marijuana... are you stupid?"})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Eating Weed.. Are you dumb?",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_eat(player)
       vRP.closeMenu(player)
     end
@@ -89,7 +107,13 @@ meth_choices["Take"] = {function(player,choice)
     if vRP.tryGetInventoryItem(user_id,"meth",1) then
       vRP.varyThirst(user_id, 5)
       vRP.varyHunger(user_id, 20)
-      vRPclient.notify(player,{"~b~ Smoking Meth."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Smoking Meth",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       vRPclient.playScreenEffect(player,{"Rampage",3*60})
       play_smoke(player)
       vRP.closeMenu(player)
@@ -97,8 +121,6 @@ meth_choices["Take"] = {function(player,choice)
   end
 end}
 items["meth"] = {"Meth","The Devils Cough Medicine",meth_choices,0.5}
-
-
 
 
 

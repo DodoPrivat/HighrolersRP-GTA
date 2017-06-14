@@ -34,21 +34,21 @@ function tvRP.isHandcuffed()
 end
 
 -- function tvRP.drag()
---   if drag then
---     local myped = GetPlayerPed(-1)
---     AttachEntityToEntity(myped, ped, 11816, 0.54, 0.54, 0.0, 0.0, 0.0, 0.0, false, false, false, false, 2, true)
---     else
---       DetachEntity(GetPlayerPed(-1), true, false)   
+--       if drag then
+--         local ped = GetPlayerPed(GetPlayerFromServerId(officerDrag))
+--         local myped = GetPlayerPed(-1)
+--         AttachEntityToEntity(myped, ped, 4103, 11816, 0.48, 0.00, 0.0, 0.0, 0.0, 0.0, false, false, false, false, 2, true)
+--       else
+--         DetachEntity(GetPlayerPed(-1), true, false)   
+--       end
 --     end
---     Citizen.Wait(0)
--- end
 
 -- (experimental, based on experimental getNearestVehicle)
 function tvRP.putInNearestVehicleAsPassenger(radius)
   local veh = tvRP.getNearestVehicle(radius)
 
   if IsEntityAVehicle(veh) then
-    for i=1,GetVehicleMaxNumberOfPassengers(veh) do
+    for i=1,math.max(GetVehicleMaxNumberOfPassengers(veh),3) do
       if IsVehicleSeatFree(veh,i) then
         SetPedIntoVehicle(GetPlayerPed(-1),veh,i)
         return true
@@ -150,52 +150,4 @@ Citizen.CreateThread(function()
   end
 end)
 
--- -- WANTED
-
--- -- wanted level sync
--- local wanted_level = 0
-
--- function tvRP.applyWantedLevel(new_wanted)
---   Citizen.CreateThread(function()
---     local old_wanted = GetPlayerWantedLevel(PlayerId())
---     local wanted = math.max(old_wanted,new_wanted)
---     ClearPlayerWantedLevel(PlayerId())
---     SetPlayerWantedLevelNow(PlayerId(),false)
---     Citizen.Wait(10)
---     SetPlayerWantedLevel(PlayerId(),wanted,false)
---     SetPlayerWantedLevelNow(PlayerId(),false)
---   end)
--- end
-
--- -- update wanted level
--- Citizen.CreateThread(function()
---   while true do
---     Citizen.Wait(2000)
-
---     local nwanted_level = GetPlayerWantedLevel(PlayerId())
---     if nwanted_level ~= wanted_level then
---       wanted_level = nwanted_level
---       vRPserver.updateWantedLevel({wanted_level})
---     end
---   end
--- end)
-
--- -- detect vehicle stealing
--- Citizen.CreateThread(function()
---   while true do
---     Citizen.Wait(1)
---     local ped = GetPlayerPed(-1)
---     if IsPedTryingToEnterALockedVehicle(ped) or IsPedJacking(ped) then
---       Citizen.Wait(2000) -- wait x seconds before setting wanted
---       local ok,vtype,name = tvRP.getNearestOwnedVehicle()
---       if not ok then -- prevent stealing detection on owned vehicle
---         for i=0,4 do -- keep wanted for 1 minutes 30 seconds
---           tvRP.applyWantedLevel(2)
---           Citizen.Wait(15000)
---         end
---       end
---       Citizen.Wait(15000) -- wait 15 seconds before checking again
---     end
---   end
--- end)
 

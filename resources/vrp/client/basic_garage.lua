@@ -6,7 +6,7 @@ function tvRP.spawnGarageVehicle(vtype,name) -- vtype is the vehicle type (one v
   local vehicle = vehicles[vtype]
   if vehicle and not IsVehicleDriveable(vehicle[3]) then -- precheck if vehicle is undriveable
     -- despawn vehicle
-    Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(vehicle[3]))
+    SetVehicleAsNoLongerNeeded(Citizen.PointerValueIntInitialized(vehicle[3]))
     vehicles[vtype] = nil
   end
 
@@ -48,11 +48,23 @@ function tvRP.despawnGarageVehicle(vtype,max_range)
 
     if GetDistanceBetweenCoords(x,y,z,px,py,pz,true) < max_range then -- check distance with the vehicule
       -- remove vehicle
-      Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(vehicle[3]))
+      SetVehicleAsNoLongerNeeded(Citizen.PointerValueIntInitialized(vehicle[3]))
       vehicles[vtype] = nil
-      tvRP.notify("Vehicle stored.")
+                TriggerClientEvent("pNotify:SendNotification", -1, {
+            text = "Vehicle Stored",
+            type = "warning",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
     else
-      tvRP.notify("Vehicle too far away.")
+                TriggerClientEvent("pNotify:SendNotification", -1, {
+            text = "Vehicle too far away!",
+            type = "warning",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
     end
   end
 end
@@ -64,6 +76,20 @@ function tvRP.getNearestVehicle(radius)
     return GetVehiclePedIsIn(ped, true)
   else
     return GetClosestVehicle(x+0.0001,y+0.0001,z+0.0001, radius+0.0001, 0, 70) 
+  end
+end
+
+function tvRP.fixeNearestVehicle(radius)
+  local veh = tvRP.getNearestVehicle(radius)
+  if IsEntityAVehicle(veh) then
+    SetVehicleFixed(veh)
+  end
+end
+
+function tvRP.replaceNearestVehicle(radius)
+  local veh = tvRP.getNearestVehicle(radius)
+  if IsEntityAVehicle(veh) then
+    SetVehicleOnGroundProperly(veh)
   end
 end
 
@@ -91,7 +117,6 @@ function tvRP.getOwnedVehiclePosition()
   return false,0,0,0
 end
 
--- Fix Vehicle
 function tvRP.fixeNearestVehicle(radius)
   local veh = tvRP.getNearestVehicle(radius)
   if IsEntityAVehicle(veh) then
@@ -105,7 +130,6 @@ function tvRP.replaceNearestVehicle(radius)
     SetVehicleOnGroundProperly(veh)
   end
 end
-
 
 -- eject the ped from the vehicle
 function tvRP.ejectVehicle()
@@ -136,3 +160,50 @@ function tvRP.vc_detachTrailer(vtype)
     DetachVehicleFromTrailer(vehicle[3])
   end
 end
+
+function tvRP.vc_detachTowTruck(vtype)
+  local vehicle = vehicles[vtype]
+  if vehicle then
+    local ent = GetEntityAttachedToTowTruck(vehicle[3])
+    if IsEntityAVehicle(ent) then
+      DetachVehicleFromTowTruck(vehicle[3],ent)
+    end
+  end
+end
+
+function tvRP.vc_detachCargobob(vtype)
+  local vehicle = vehicles[vtype]
+  if vehicle then
+    local ent = GetVehicleAttachedToCargobob(vehicle[3])
+    if IsEntityAVehicle(ent) then
+      DetachVehicleFromCargobob(vehicle[3],ent)
+    end
+  end
+end
+
+function tvRP.vc_toggleEngine(vtype)
+  local vehicle = vehicles[vtype]
+  if vehicle then
+    local running = Citizen.InvokeNative(0xAE31E7DF9B5B132E,vehicle[3]) -- GetIsVehicleEngineRunning
+    SetVehicleEngineOn(vehicle[3],not running,true,true)
+  end
+end
+
+function tvRP.vc_toggleLock(vtype)
+  local vehicle = vehicles[vtype]
+  if vehicle then
+    local veh = vehicle[3]
+    local locked = GetVehicleDoorLockStatus(veh) >= 2
+    if locked then -- unlock
+      SetVehicleDoorsLockedForAllPlayers(veh, false)
+      SetVehicleDoorsLocked(veh,1)
+      SetVehicleDoorsLockedForPlayer(veh, PlayerId(), false)
+      tvRP.notify("Vehicle unlocked.")
+    else -- lock
+      SetVehicleDoorsLocked(veh,2)
+      SetVehicleDoorsLockedForAllPlayers(veh, true)
+      tvRP.notify("Vehicle locked.")
+    end
+  end
+end
+

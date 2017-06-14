@@ -19,7 +19,7 @@ html, body {
 /* menu */
 
 .menu{
-  background-color: rgba(0,0,0,0.75); /*Choices BG*/
+  background-color: rgba(50,50,58,1); /*Choices BG  (0,0,0,0.75)a  */
   color: white;
   width: 200px;
   height: 50%;

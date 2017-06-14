@@ -17,9 +17,9 @@ local function ch_list(player,choice)
         local source = vRP.getUserSource(k)
         local identity = vRP.getUserIdentity(k)
         if source ~= nil then
-          content = content.."<br />["..k.."] => "..GetPlayerName(source)
+          content = content.."<br />ID  :  ["..k.."]   >   "..GetPlayerName(source)
           if identity then
-            content = content.." "..htmlEntities.encode(identity.firstname).." "..htmlEntities.encode(identity.name).." "..identity.registration
+            content = content.." "..htmlEntities.encode(identity.name) ---
           end
         end
       end
@@ -140,6 +140,20 @@ local function ch_emote(player,choice)
   end
 end
 
+local function ch_sound(player,choice)
+  local user_id = vRP.getUserId(player)
+  if user_id ~= nil and vRP.hasPermission(user_id,"player.custom_sound") then
+    vRP.prompt(player,"Sound 'dict name': ","",function(player,content)
+      local args = {}
+      for arg in string.gmatch(content,"[^%s]+") do
+        table.insert(args,arg)
+      end
+      vRPclient.playSound(player,{args[1] or "", args[2] or ""})
+    end)
+  end
+end
+
+
 local function ch_coords(player,choice)
   vRPclient.getPosition(player,{},function(x,y,z)
     vRP.prompt(player,"Copy the coordinates using Ctrl-A Ctrl-C",x..","..y..","..z,function(player,choice) end)
@@ -188,7 +202,7 @@ local function ch_givemoney(player,choice)
   local user_id = vRP.getUserId(player)
   if user_id ~= nil then
     vRP.prompt(player,"Amount:","",function(player,amount) 
-      amount = tonumber(amount)
+      amount = parseInt(amount)
       vRP.giveMoney(user_id, amount)
     end)
   end
@@ -200,12 +214,32 @@ local function ch_giveitem(player,choice)
     vRP.prompt(player,"Id name:","",function(player,idname) 
       idname = idname or ""
       vRP.prompt(player,"Amount:","",function(player,amount) 
-        amount = tonumber(amount)
+        amount = parseInt(amount)
         vRP.giveInventoryItem(user_id, idname, amount)
       end)
     end)
   end
 end
+
+local player_customs = {}
+
+local function ch_display_custom(player, choice)
+  vRPclient.getCustomization(player,{},function(custom)
+    if player_customs[player] then -- hide
+      player_customs[player] = nil
+      vRPclient.removeDiv(player,{"customization"})
+    else -- show
+      local content = ""
+      for k,v in pairs(custom) do
+        content = content..k.." => "..json.encode(v).."<br />" 
+      end
+
+      player_customs[player] = true
+      vRPclient.setDiv(player,{"customization",".div_customization{ margin: auto; padding: 8px; width: 500px; margin-top: 80px; background: black; color: white; font-weight: bold; ", content})
+    end
+  end)
+end
+
 
 local function ch_noclip(player, choice)
   vRPclient.toggleNoclip(player, {})
@@ -252,6 +286,9 @@ AddEventHandler("vRP:buildMainMenu",function(player)
       if vRP.hasPermission(user_id,"player.custom_emote") then
         menu["@Custom emote"] = {ch_emote}
       end
+      if vRP.hasPermission(user_id,"player.custom_sound") then
+        menu["@Custom sound"] = {ch_sound}
+      end
       if vRP.hasPermission(user_id,"player.coords") then
         menu["@Coords"] = {ch_coords}
       end
@@ -269,6 +306,9 @@ AddEventHandler("vRP:buildMainMenu",function(player)
       end
       if vRP.hasPermission(user_id,"player.giveitem") then
         menu["@Give item"] = {ch_giveitem}
+      end
+      if vRP.hasPermission(user_id,"player.display_custom") then
+        menu["@Display customization"] = {ch_display_custom}
       end
       vRP.openMenu(player,menu)
     end}

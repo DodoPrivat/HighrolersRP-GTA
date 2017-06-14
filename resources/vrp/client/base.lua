@@ -32,6 +32,14 @@ function tvRP.isInside()
 end
 
 -- return vx,vy,vz
+
+-- return false if in exterior, true if inside a building
+function tvRP.isInside()
+  local x,y,z = tvRP.getPosition()
+  return not (GetInteriorAtCoords(x,y,z) == 0)
+end
+
+-- return vx,vy,vz
 function tvRP.getSpeed()
   local vx,vy,vz = table.unpack(GetEntityVelocity(GetPlayerPed(-1)))
   return math.sqrt(vx*vx+vy*vy+vz*vz)
@@ -101,12 +109,23 @@ function tvRP.getNearestPlayer(radius)
 
   return p
 end
+--Notifications
+
+function SetQueueMax(queue, max)
+    local tmp = {
+        queue = tostring(queue),
+        max = tonumber(max)
+    }
+
+    SendNUIMessage({maxNotifications = tmp})
+end
 
 function tvRP.notify(msg)
   SetNotificationTextEntry("STRING")
   AddTextComponentString(msg)
   DrawNotification(true, false)
 end
+
 
 -- SCREEN
 
@@ -239,6 +258,22 @@ Citizen.CreateThread(function()
   end
 end)
 
+-- SOUND
+-- some lists: 
+-- pastebin.com/A8Ny8AHZ
+-- https://wiki.gtanet.work/index.php?title=FrontEndSoundlist
+
+-- play sound at a specific position
+function tvRP.playSpatializedSound(dict,name,x,y,z,range)
+  PlaySoundFromCoord(-1,name,x+0.0001,y+0.0001,z+0.0001,dict,0,range+0.0001,0)
+end
+
+-- play sound
+function tvRP.playSound(dict,name)
+  PlaySound(-1,name,dict,0,0,1)
+end
+
+
 --[[
 -- not working
 function tvRP.setMovement(dict)
@@ -264,3 +299,24 @@ AddEventHandler("onPlayerKilled",function(player,killer,reason)
   TriggerServerEvent("vRPcli:playerDied")
 end)
 
+-- voice proximity computation
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(500)
+    local ped = GetPlayerPed(-1)
+    local proximity = cfg.voice_proximity
+  
+    if IsPedSittingInAnyVehicle(ped) then
+     local veh = GetVehiclePedIsIn(ped,false)
+      local hash = GetEntityModel(veh)
+      -- make open vehicles (bike,etc) use the default proximity
+      if IsThisModelACar(hash) or IsThisModelAHeli(hash) or IsThisModelAPlane(hash) then
+        proximity = cfg.voice_proximity_vehicle
+      end
+    elseif tvRP.isInside() then
+      proximity = cfg.voice_proximity_inside
+    end
+
+    NetworkSetTalkerProximity(proximity+0.0001)
+  end
+end)

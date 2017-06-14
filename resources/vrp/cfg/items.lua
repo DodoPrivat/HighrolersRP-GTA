@@ -22,7 +22,13 @@ cfg.items = {
         if vRP.tryGetInventoryItem(user_id,"peach",1) then
           vRP.varyHunger(user_id,-10)
           vRP.varyThirst(user_id,-10)
-          vRPclient.notify(player,{"~o~ Eating Peach."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Eating Peach",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
           play_eat(player)
           vRP.closeMenu(player)
         end

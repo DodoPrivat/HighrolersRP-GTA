@@ -50,7 +50,7 @@ client_scripts{
   "client/basic_garage.lua",
   "client/police.lua",
   "client/admin.lua",
-  "client/paycheck.lua"
+  "client/paycheck.lua",
 }
 
 -- client files
@@ -62,5 +62,6 @@ files{
   "gui/ProgressBar.js",
   "gui/WPrompt.js",
   "gui/RequestManager.js",
-  "gui/Div.js"
+  "gui/Div.js",
 }
+

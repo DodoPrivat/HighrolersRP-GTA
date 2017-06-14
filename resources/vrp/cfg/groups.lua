@@ -25,18 +25,67 @@ end
 
 function police.onjoin(player)
   police.init(player)
-  vRPclient.notify(player,{"You have went on duty."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You went on duty as a Police Officer",
+            type = "info",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
 end
 
 function police.onleave(player)
   vRPclient.giveWeapons(player,{{},true})
-  vRPclient.notify(player,{"You have went off duty."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You went off duty",
+            type = "error",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
   vRPclient.setCop(player,{false})
 end
 
 function police.onspawn(player)
   police.init(player)
-  vRPclient.notify(player,{"You are a Police Officer."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You are a Police Officer",
+            type = "info",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
+end
+
+local offduty = {}
+function offduty.onjoin(player)
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Off Duty Police Officer",
+            type = "info",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
+end
+
+function offduty.onspawn(player)
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You are an Off Duty Officer",
+            type = "info",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
+end
+
+function offduty.onleave(player)
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Going on Duty...",
+            type = "error",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
 end
 
 local ems = {}
@@ -52,31 +101,167 @@ end
 
 function ems.onjoin(player)
   ems.init(player)
-  vRPclient.notify(player,{"You are an EMT!"})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You've gone on Duty. Visit the Drug Store to get your equipment!",
+            type = "info",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
 end
 
 function ems.onleave(player)
   vRPclient.giveWeapons(player,{{},true})
-  vRPclient.notify(player,{"You have left the Hospital."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You have left the Hospital",
+            type = "error",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
   vRPclient.setEms(player,{false})
 end
 
 function ems.onspawn(player)
   ems.init(player)
-  vRPclient.notify(player,{"You are an EMT."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You are an EMT",
+            type = "info",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
 end
 
 local taxi = {}
 function taxi.onjoin(player)
-  vRPclient.notify(player,{"You are a Taxi Driver!"})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You are a Taxi Driver",
+            type = "info",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
 end
 
 function taxi.onspawn(player)
-  vRPclient.notify(player,{"You are a Taxi Driver."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You are a Taxi Driver",
+            type = "info",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
 end
 
 function taxi.onleave(player)
-  vRPclient.notify(player,{"Quit Taxi Driver job."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Quit Taxi Driver",
+            type = "error",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
+end
+
+local news = {}
+function news.onjoin(player)
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Joined Weasel News",
+            type = "info",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Use /news [MSG] to do your job!",
+            type = "info",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
+end
+
+function news.onspawn(player)
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You are a News Reporter",
+            type = "info",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
+end
+
+function news.onleave(player)
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Quit Weasel News",
+            type = "error",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
+end
+
+local citizen = {}
+function citizen.onjoin(player)
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You are an Unemployed Citizen",
+            type = "error",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
+end
+
+function citizen.onspawn(player)
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You are an Unemployed Citizen",
+            type = "error",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
+end
+
+function citizen.onleave(player)
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Enjoy your new Job!",
+            type = "success",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
+end
+
+local tow = {}
+function tow.onjoin(player)
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You are a Mechanic",
+            type = "info",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
+end
+
+function tow.onspawn(player)
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You are a Mechanic",
+            type = "info",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
+end
+
+function tow.onleave(player)
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You have quit Mechanic",
+            type = "error",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
 end
 
 local brokia = {}
@@ -84,11 +269,23 @@ function brokia.onjoin(player)
 local user_id = vRP.getUserId(player)
   vRP.giveInventoryItem(user_id,"brokia", 1)
   vRP.giveMoney(user_id,-50)
-	vRPclient.notify(source,{"You have activated your Brokia Phone"})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You have Activated your Brokia phone!",
+            type = "info",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
 end
 
 function brokia.onleave(player)
-  vRPclient.notify(source,{"You have canceled your Contract"})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You have canceled your contract!",
+            type = "error",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
 end
 
 local function user_spawn(player)
@@ -97,7 +294,13 @@ local function user_spawn(player)
     -- welcome instructions
     local data = vRP.getUserDataTable(user_id)
 
-    vRPclient.notify(player,{"Loading : Please wait..."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Loading : Please wait for the 'Loading...' box to disappear!",
+            type = "info",
+            timeout = math.random(1000, 50000),
+            layout = "centerRight",
+            queue = "left"
+            })
   end
 end
 
@@ -113,6 +316,8 @@ cfg.groups = {
     "player.unban",
     "player.noclip",
     "player.custom_emote",
+    "player.display_custom",
+    "player.custom_sound",
     "player.coords",
     "player.tptome",
     "player.tpto",
@@ -128,7 +333,8 @@ cfg.groups = {
     "police.askid",
     "phones.store",
     "player.list",
-    "citizen.paycheck"
+    "citizen.paycheck",
+    "player.list"
   },
   -- Phone Group
   ["Activate Brokia Phone"] = {
@@ -143,12 +349,13 @@ cfg.groups = {
     "phone.store"
   },
   -- Emergency
-  ["police"] = {
+  ["Police"] = {
     _config = { gtype = "job", onleave = police.onleave, onjoin = police.onjoin, onspawn = police.onspawn },
     "police.cloakroom",
     "police.pc",
     "police.handcuff",
     "police.putinveh",
+    "police.getoutveh",
     "police.askid",
     "police.check",
     "police.service",
@@ -171,46 +378,47 @@ cfg.groups = {
     "emergency.service",
     "emergency.vehicle",
     "police.paycheck",
-    "ems.cloakroom",
-    "ems.access"
+    "ems.cloakroom"
   },
-  ["taxi"] = {
+  ["Taxi"] = {
     _config = { gtype = "job", onspawn = taxi.onspawn, onjoin = taxi.onjoin, onleave = taxi.onleave },
     "taxi.service",
-    "taxi.vehicle",
+    "job.vehicle",
     "taxi.paycheck"
   },
-  ["citizen"] = {
-    _config = { gtype = "job" }
+  ["News"] = {
+    _config = { gtype = "job", onspawn = news.onspawn, onjoin = news.onjoin, onleave = news.onleave },
+    "news.service",
+    "job.vehicle",
+    "taxi.paycheck"
+  },
+  ["Citizen"] = {
+    _config = { gtype = "job", onspawn = citizen.onspawn, onjoin = citizen.onjoin, onleave = citizen.onleave },
     "citizen.paycheck"
   },
-  ["Leave PD"] = {
-    _config = { gtype = "job" }
+  ["OffDuty"] = {
+    _config = { gtype = "job", onspawn = offduty.onspawn, onjoin = offduty.onjoin, onleave = offduty.onleave },
     "police.access",
     "police.askid",
     "phones.store",
     "player.list",
-    "citizen.paycheck"
-  },
-  ["Leave EMT"] = {
-    _config = { gtype = "job" }
-    "ems.access",
-    "police.askid",
-    "phones.store",
-    "player.list",
-    "citizen.paycheck" 
+    "citizen.paycheck",
+    "player.list"
   },
   ["Tow"] = {
-    _config = { gtype = "job" }
-    "repair.service",
-    "vehicle.replace"
+    _config = { gtype = "job", onspawn = tow.onspawn, onjoin = tow.onjoin, onleave = tow.onleave }
+    "vehicle.repair",
+    "vehicle.replace",
+    "repair.service", 
+    "tow.shop"
   }
 }
 
 -- groups are added dynamically using the API or the menu, but you can add group when an user join here
 cfg.users = {
-  [1] = { "admin", "superadmin" }
-  }
+-- Dimmies
+  [1] = { "admin", "OffDuty" } 
+}
 
 
 -- group selectors
@@ -220,22 +428,23 @@ cfg.users = {
 cfg.selectors = {
   ["Jobs"] = {
     _config = {x = -268.363739013672, y = -957.255126953125, z = 31.22313880920410, blipid = 351, blipcolor = 47},
-    "taxi",
-    "citizen",
-    "tow"
+    "Taxi",
+    "Citizen",
+    "Tow",
+    "News"
   },
-  ["police"] = {
-    _config = {x = 437.924987792969,y = -987.974182128906, z = 30.6896076202393 , blipid = 351, blipcolor= 38, permission = "police.access" },
-    "police",
-    "Leave PD"
+  ["Police"] = {
+    _config = {x = 440.360168457031,y = -993.374755859375, z = 30.6895999908447 , blipid = 351, blipcolor= 38, permission = "police.access" },
+    "Police",
+    "OffDuty"
   },
   ["EMS"] = {
-    _config = {x=-498.959716796875,y=-335.715148925781,z=34.5017547607422, blipid = 351, blipcolor= 1, permission = "ems.access" },
+    _config = {x=-498.959716796875,y=-335.715148925781,z=34.5017547607422, blipid = 351, blipcolor= 1 },
     "EMS",
-    "Leave EMT"
+    "Citizen"
   },
   ["Life Invader"] = {
-    -- _config = { x=-1082.90014648438,y=-248.791107177734,z=37.7632904052734, blipid = 351, blipcolor= 1 },
+    _config = { x=-1082.90014648438,y=-248.791107177734,z=37.7632904052734, blipid = 351, blipcolor= 1 },
     "Activate Brokia Phone",
     "Cancel Contract"
   }
@@ -243,3 +452,4 @@ cfg.selectors = {
 
 return cfg
 
+-- 60 103 125

@@ -241,17 +241,17 @@ cfg.item_transformers = {
   }
 },
 
-  {
+  {  
     name="Jeweler",
     r=255,g=255,b=0,
     max_units=5000,
     units_per_minute=5000,
-    x=-139.963653564453,y=-823.515258789063,z=31.4466247558594, 
+    x=-624.456787109375,y=-232.684906005859,z=38.0570526123047,
     radius=8,height=1.5,
     action="Sell Gold",
-    description="Sell gold : $1000/ingot.",
+    description="Sell gold : $500/ingot.",
     in_money=0,
-    out_money=1000,
+    out_money=500,
     reagents={
       ["gold_ingot"] = 1
     },

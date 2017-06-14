@@ -11,8 +11,9 @@ AutoStartResources:
     - rconlog
     - hardcap # prevents the game from breaking
     - vrp
-    - GTAV-Simple-Loading-Screen
-#    - fivem-gta-loading
+#    - GTAV-Simple-Loading-Screen
+    - fivem-gta-loading
+    - disclaimer
     - assets
     - deleteveh
     - frfuel
@@ -32,8 +33,19 @@ AutoStartResources:
     - chat
     - lux_vehcontrol
     - addition
-    - cruiseControl
-    
+    - speedo
+    - heli
+    - RappelHeli
+    - Me
+    - StoreWeapons
+    - vehiclehealth
+    # - TruckerJob
+    - localchat
+    - taxi
+    - scriptrestarter
+    - pNotify
+    - bob74_ipl
+
 # do change
 RconPassword: dimdim
 

@@ -31,7 +31,13 @@ water_choices["Drink"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"water",1) then
       vRP.varyThirst(user_id,-25)
-      vRPclient.notify(player,{"~b~ Drinking water."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Drinking Water",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_drink(player)
       vRP.closeMenu(player)
     end
@@ -46,7 +52,13 @@ milk_choices["Drink"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"milk",1) then
       vRP.varyThirst(user_id,-20)
-      vRPclient.notify(player,{"~b~ Drinking Milk."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Drinking Milk",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_drink(player)
       vRP.closeMenu(player)
     end
@@ -61,7 +73,13 @@ coffee_choices["Drink"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"coffee",1) then
       vRP.varyThirst(user_id,-10)
-      vRPclient.notify(player,{"~b~ Drinking Coffee."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Drinking Coffee",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_drink(player)
       vRP.closeMenu(player)
     end
@@ -76,7 +94,13 @@ tea_choices["Drink"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"tea",1) then
       vRP.varyThirst(user_id,-15)
-      vRPclient.notify(player,{"~b~ Drinking Tea."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Drinking Tea",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_drink(player)
       vRP.closeMenu(player)
     end
@@ -91,7 +115,13 @@ icedtea_choices["Drink"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"icedtea",1) then
       vRP.varyThirst(user_id,-20)
-      vRPclient.notify(player,{"~b~ Drinking Iced Tea."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Drinking Iced Tea",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_drink(player)
       vRP.closeMenu(player)
     end
@@ -106,7 +136,13 @@ orangejuice_choices["Drink"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"orangejuice",1) then
       vRP.varyThirst(user_id,-25)
-      vRPclient.notify(player,{"~b~ Drinking Orange Juice"})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Drinking Orange Juice",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_drink(player)
       vRP.closeMenu(player)
     end
@@ -121,7 +157,13 @@ gocagola_choices["Drink"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"gocagola",1) then
       vRP.varyThirst(user_id,-35)
-      vRPclient.notify(player,{"~b~ Drinking Goca Gola."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Drinking Goca Gola",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_drink(player)
       vRP.closeMenu(player)
     end
@@ -136,7 +178,13 @@ redgull_choices["Drink"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"redgull",1) then
       vRP.varyThirst(user_id,-40)
-      vRPclient.notify(player,{"~b~ Drinking RedGull."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Drinking RedGull",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_drink(player)
       vRP.closeMenu(player)
     end
@@ -151,7 +199,13 @@ lemonade_choices["Drink"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"lemonade",1) then
       vRP.varyThirst(user_id,-45)
-      vRPclient.notify(player,{"~b~ Drinking Lemonade."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Drinking Lemonade",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_drink(player)
       vRP.closeMenu(player)
     end
@@ -167,7 +221,13 @@ vodka_choices["Drink"] = {function(player,choice)
     if vRP.tryGetInventoryItem(user_id,"vodka",1) then
       vRP.varyThirst(user_id,-65)
       vRP.varyHunger(user_id, 15)
-      vRPclient.notify(player,{"~b~ Drinking Vodka."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Drinking Vodka",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       vRPclient.playScreenEffect(player,{"DrugsDrivingIn",3*60})
       play_drink(player)
       vRP.closeMenu(player)
@@ -184,7 +244,13 @@ whiskey_choices["Drink"] = {function(player,choice)
     if vRP.tryGetInventoryItem(user_id,"whiskey",1) then
       vRP.varyThirst(user_id,-65)
       vRP.varyHunger(user_id, 15)
-      vRPclient.notify(player,{"~b~ Drinking Whiskey."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Drinking Whiskey",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       vRPclient.playScreenEffect(player,{"DrugsDrivingIn",3*60})
       play_drink(player)
       vRP.closeMenu(player)
@@ -201,7 +267,13 @@ jackncoke_choices["Drink"] = {function(player,choice)
     if vRP.tryGetInventoryItem(user_id,"jackncoke",1) then
       vRP.varyThirst(user_id,-65)
       vRP.varyHunger(user_id, 15)
-      vRPclient.notify(player,{"~b~ Drinking Jack n Coke."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Drinking JackNCoke",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       vRPclient.playScreenEffect(player,{"DrugsDrivingIn",3*60})
       play_drink(player)
       vRP.closeMenu(player)
@@ -218,7 +290,13 @@ beer_choices["Drink"] = {function(player,choice)
     if vRP.tryGetInventoryItem(user_id,"beer",1) then
       vRP.varyThirst(user_id,-65)
       vRP.varyHunger(user_id, 15)
-      vRPclient.notify(player,{"~b~ Drinking Beer."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Drinking Beer",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       vRPclient.playScreenEffect(player,{"DrugsDrivingIn",3*60})
       play_drink(player)
       vRP.closeMenu(player)
@@ -235,7 +313,13 @@ wine_choices["Drink"] = {function(player,choice)
     if vRP.tryGetInventoryItem(user_id,"wine",1) then
       vRP.varyThirst(user_id,-65)
       vRP.varyHunger(user_id, 15)
-      vRPclient.notify(player,{"~b~ Drinking Wine."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Drinking Wine",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       vRPclient.playScreenEffect(player,{"DrugsDrivingIn",3*60})
       play_drink(player)
       vRP.closeMenu(player)
@@ -254,7 +338,13 @@ breed_choices["Eat"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"bread",1) then
       vRP.varyHunger(user_id,-10)
-      vRPclient.notify(player,{"~o~ Eating Bread."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Eating Bread",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_eat(player)
       vRP.closeMenu(player)
     end
@@ -270,7 +360,13 @@ corn_choices["Eat"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"corn",1) then
       vRP.varyHunger(user_id,-20)
-      vRPclient.notify(player,{"~o~ Eating George's Soul."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Eating Dende's Soul",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_eat(player)
       vRP.closeMenu(player)
     end
@@ -286,7 +382,13 @@ wings_choices["Eat"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"wings",1) then
       vRP.varyHunger(user_id,-15)
-      vRPclient.notify(player,{"~o~ Eating Wings."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Eating Wings",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_eat(player)
       vRP.closeMenu(player)
     end
@@ -301,7 +403,13 @@ items["wings"] = {"Wings","",wings_choices,0.5}
 --   if user_id ~= nil then
 --     if vRP.tryGetInventoryItem(user_id,"peach",1) then
 --       vRP.varyHunger(user_id,-25)
---       vRPclient.notify(player,{"~o~ Eating Peaches."})
+--           TriggerClientEvent("pNotify:SendNotification", source, {
+--             text = "Eating Peach",
+--             type = "info",
+--             timeout = math.random(1000, 3500),
+--             layout = "centerRight",
+--             queue = "left"
+--             })
 --       play_eat(player)
 --       vRP.closeMenu(player)
 --     end
@@ -316,7 +424,13 @@ donut_choices["Eat"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"donut",1) then
       vRP.varyHunger(user_id,-15)
-      vRPclient.notify(player,{"~o~ Eating Donut."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Eating Donut",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_eat(player)
       vRP.closeMenu(player)
     end
@@ -331,7 +445,13 @@ tacos_choices["Eat"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"tacos",1) then
       vRP.varyHunger(user_id,-25)
-      vRPclient.notify(player,{"~o~ Eating Tacos."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Eating Tacos",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_eat(player)
       vRP.closeMenu(player)
     end
@@ -346,7 +466,13 @@ sd_choices["Eat"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"sandwich",1) then
       vRP.varyHunger(user_id,-25)
-      vRPclient.notify(player,{"~o~ Eating sandwich."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Eating Sandwich",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_eat(player)
       vRP.closeMenu(player)
     end
@@ -361,13 +487,19 @@ kebab_choices["Eat"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"kebab",1) then
       vRP.varyHunger(user_id,-45)
-      vRPclient.notify(player,{"~o~ Eating Kebab."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Eating Kebab",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_eat(player)
       vRP.closeMenu(player)
     end
   end
 end}
-items["kebab"] = {"Kebab","",kebab_choices,0.4}
+items["kebab"] = {"Kebab","",kebab_choices,0.4} --
 
 -- create Premium Donut item
 local pdonut_choices = {}
@@ -376,7 +508,13 @@ pdonut_choices["Eat"] = {function(player,choice)
   if user_id ~= nil then
     if vRP.tryGetInventoryItem(user_id,"pdonut",1) then
       vRP.varyHunger(user_id,-25)
-      vRPclient.notify(player,{"~o~ Eating Premium Donut."})
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Eating Premium Donut",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
       play_eat(player)
       vRP.closeMenu(player)
     end

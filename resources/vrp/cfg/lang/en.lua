@@ -8,7 +8,8 @@ local lang = {
     invalid_value = "~r~Invalid value.",
     invalid_name = "~r~Invalid name.",
     not_found = "~r~Not found.",
-    request_refused = "~r~Request refused."
+    request_refused = "~r~Request refused.",
+    wearing_uniform = "~r~Careful! ~w~You're wearing a uniform!"
   },
   survival = {
     starving = "STARVING",
@@ -282,8 +283,8 @@ local lang = {
     service = {
       title = "Services",
       description = "Call a service or an emergency number.",
-      prompt = "If needed, enter a message for the service:",
-      ask_call = "Received {1} call, responding ? <em>{2}</em>",
+      prompt = "Enter Information (You may want to include your Phone # for a reply!):",
+      ask_call = "Received {1} call, responding? <em>{2}</em>",
       taken = "~r~This call is already taken."
     }
   },
@@ -297,7 +298,7 @@ local lang = {
   home = {
     buy = {
       title = "Buy",
-      description = "Buy a home here, price is {1} $.",
+      description = "Buy a home here, price is ~g~$ {1} .",
       bought = "~g~Bought.",
       full = "~r~The place is full.",
       have_home = "~r~You already have a home."
@@ -339,6 +340,10 @@ local lang = {
       description = "Buy vehicles.",
       info = "{1} $<br /><br />{2}"
     },
+    sell = {
+      title = "Sell",
+      description = "Sell vehicles."
+    },
     store = {
       title = "Store",
       description = "Put your current vehicle in the garage."
@@ -355,18 +360,34 @@ local lang = {
       title = "Detach trailer",
       description = "Detach trailer."
     },
+    detach_towtruck = {
+      title = "Detach tow truck",
+      description = "Detach tow truck."
+    },
+    detach_cargobob = {
+      title = "Detach cargobob",
+      description = "Detach cargobob."
+    },
+    lock = {
+      title = "Lock/unlock",
+      description = "Lock or unlock the vehicle."
+    },
+    engine = {
+      title = "Engine on/off",
+      description = "Start or stop the engine."
+    },
      asktrunk = {
       title = "Ask to open Trunk",
       asked = "~g~Asking...",
       request = "Do you want to open the trunk?"
     },
-    replace = {
-      title = "Replace vehicle",
-      description = "Replace on ground the nearest vehicle."
-    },
-    repair = {
-      title = "Repair vehicle",
-      description = "Repair the nearest vehicle."
+     replace = {
+       title = "Replace vehicle",
+       description = "Replace the nearest vehicle."
+     },
+     repair = {
+       title = "Repair vehicle",
+       description = "Repair the nearest vehicle."
     }
   },
   gunshop = {

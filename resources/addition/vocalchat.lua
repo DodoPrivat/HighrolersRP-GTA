@@ -38,10 +38,10 @@ Citizen.CreateThread(function()
 				NetworkSetTalkerProximity(3.001)
 				ShowNotif("Proximity : ~h~~b~Whisper")
 			elseif vocalLevel == 2 then
-				NetworkSetTalkerProximity(5.001)
+				NetworkSetTalkerProximity(12.001)
 				ShowNotif("Proximity : ~h~~b~Normal")
 			elseif vocalLevel == 3 then
-				NetworkSetTalkerProximity(12.091)
+				NetworkSetTalkerProximity(30.091)
 				ShowNotif("Proximity : ~h~~b~Yell")
 			end
 			Wait(200)

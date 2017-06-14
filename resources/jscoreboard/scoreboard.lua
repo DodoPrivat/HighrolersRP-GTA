@@ -3,7 +3,7 @@ local Settings = {
 	["WantedStars"] = false,
 	
 	--Should the scoreboard draw player ID?
-	["PlayerID"] = true,
+	["PlayerID"] = false,
 	
 	--Should the scoreboard draw voice indicator?
 	["VoiceIndicator"] = true,

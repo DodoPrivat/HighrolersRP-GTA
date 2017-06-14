@@ -89,7 +89,7 @@
 #disclaimer .innerbox{
 	z-index: 2;
 	width: 550px;	
-	margin: 0px 50px 0px 400px;  
+	margin: 0px 50px 0px 325px;  /*400*/
 	text-align: left;
 	background: transparent;
 	-webkit-font-smoothing: antialiased;
@@ -115,9 +115,9 @@
 	
 #disclaimer .footerbox{
   z-index: 2;
-  width: 450px;	
-  margin: 80px 0px 0px 480px;
-  height: 110px;
+  width: 350;	/*450*/
+  margin: 80px 0px 0px 350px;
+  height: 90px;
   text-align: left; 
 }
 	

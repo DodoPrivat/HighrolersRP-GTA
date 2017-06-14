@@ -4,6 +4,12 @@ cfg = {}
 
 cfg.iplload = true
 
+-- Voice Proximity
+cfg.voice_proximity = 30.0 -- Outside
+cfg.voice_proximity_vehicle = 5.0 -- In Vehicle
+cfg.voice_proximity_inside = 9.0 -- In Building
+
+
 cfg.gui = {
   anchor_minimap_width = 260, --260
   anchor_minimap_left = 550, --60

@@ -8,8 +8,10 @@ local cfg = {}
 -- this is used to let the player spawn a boat AND a car at the same time for example, and only despawn it in the correct garage
 -- _config: vtype, blipid, blipcolor, permission (optional, only users with the permission will have access to the shop)
 
+cfg.sell_factor = 0.75 -- sell for 75% of the original price
+
 cfg.garage_types = {
-  ["cars"]  = {
+  ["Cars"]  = {
     _config = {vtype="car",blipid=225,blipcolor=4},
     ["blista"] = {"Blista", 15000, ""},
     ["brioso"] = {"Brioso R/A", 155000, ""},
@@ -175,29 +177,31 @@ cfg.garage_types = {
     ["thrust"] = {"Thrust",75000, ""},
     ["vader"] = {"Vader",9000, ""}
   },
-    ["beaters"] = {
+    ["Beaters"] = {
     _config = {vtype="car", blipid=56,blipcolor=5},
     ["emperor2"] = {"Albany Emperor",350,""}
   },
-   ["taxi"] = {
-    _config = {vtype="car", blipid=56, blipcolor=5, permission = "taxi.vehicle"},
-    ["taxi"] = {"Taxi",350,""}
+   ["Job"] = {
+    _config = {vtype="car", blipid=56, blipcolor=5, permission = "job.vehicle"},
+    ["taxi"] = {"Taxi",350,""},
+    ["rumpo"] = {"News Van",400,""},
+    ["UTILLITRUCK3"] = {"Repair Service Truck",400,""}
   },
-  ["police"] = {
+  ["Police"] = {
     _config = {vtype="car", blipid=50, blipcolor=38, permission = "police.vehicle"},
-    ["police"] = {"CVPI",100,""},
-    ["police2"] = {"Marked Buffalo",100,""},
-    ["police3"] = {"Marked Impala",100,""},
-    ["police4"] = {"UM Charger",100,""},
-    ["fbi"] = {"FBI UM Orcacle",100,""},
-    ["fbi2"] = {"FBI UM Suburban",100,""}
+    ["police"] = {"CVPI",100,"Rank Required : Cadet"},
+    ["police2"] = {"Marked Buffalo",100,"Rank Required : Officer"},
+    ["police3"] = {"Marked Impala",100,"Rank Required : Cadet"},
+    ["police4"] = {"UM Charger",100,"Rank Required : Sergeant"},
+    ["fbi"] = {"FBI UM Orcacle",100,"Rank Required : FBI"},
+    ["fbi2"] = {"FBI UM Suburban",100,"Rank Required : FBI"}
   },
   ["EMS"] = {
     _config = {vtype="car",blipid=61,blipcolor=3,permission="emergency.vehicle"},
     ["ambulance"] = {"Ambulance",100,""},
     ["firetruk"] = {"FireTruck",100,""}
   },
-  ["bikes"] = {
+  ["Bikes"] = {
     _config = {vtype="bike",blipid=376,blipcolor=4},
     ["tribike"] = {"Tribike", 250, ""},
     ["BMX"] = {"BMX", 450, ""}
@@ -235,7 +239,7 @@ cfg.garage_types = {
   --   ["luxor"] = {"Luxor", 3500000, "Jet privé."},
   --   ["luxor2"] = {"Luxor II", 3500000, "Jet privé."}
   -- },
-  ["helicopters"] = {
+  ["Helicopters"] = {
     _config = {vtype="fly",blipid=43,blipcolor=4},
     ["maverick"] = {"Maverick", 350000, "Entry Level Helicopter"},
     ["swift"] = {"Swift", 450000, "Mid-Class Helicopter"},
@@ -244,7 +248,11 @@ cfg.garage_types = {
     ["supervolito2"] = {"Super Volito II", 1000000, "Large Mid-Class Helicopter"},
     ["volatus"] = {"Volatus", 1500000, "High-End Business Class Helicopter"}
   },
-  ["transport"] = {
+  ["PDHeli"] = {
+    _config = {vtype="fly", permission = "police.vehicle"},
+    ["polmav"] = {"Police Helicopter", 350000, "Lieutenant Approval Required!"},
+  },
+  ["Transport"] = {
     _config = {vtype="car",blipid=318,blipcolor=4},
     ["packer"] = {"Packer", 42000, "18-Wheeler Cabin : Holds 50lbs"},
     ["benson"] = {"Benson", 25000, "Large Box Truck : Holds 50lbs"},
@@ -252,7 +260,7 @@ cfg.garage_types = {
     ["burrito3"] = {"Declasse Burriot", 18000, "Van : Holds 100lbs"},
     ["pounder"] = {"MTL Pounder", 28000, "Large Truck w/ Cabin and Trailer : Holds 150lbs"}
   },
-  ["trailers"] = {
+  ["Trailers"] = {
     _config = {vtype="trailer",blipid=318,blipcolor=17},
     ["trailersmall"] = {"Petit", 3000, "Small Trailer : Holds 100lbs"},
     ["trailers"] = {"Basic", 30000, "18-Wheeler Trailer : Holds 350lbs"},
@@ -262,19 +270,20 @@ cfg.garage_types = {
 
 -- {garage_type,x,y,z}
 cfg.garages = {
-  {"cars",-43.9820404052734,-1096.92199707031,26.4223537445068},
-  {"beaters",261.612365722656,-1186.61938476563,29.510461807251},
-  {"taxi",-286.870056152344,-917.948181152344,31.080623626709},
-  {"police",454.4,-1017.6,28.4},
+  {"Cars",-43.9820404052734,-1096.92199707031,26.4223537445068},
+  {"Beaters",261.612365722656,-1186.61938476563,29.510461807251},
+  {"Job",-286.870056152344,-917.948181152344,31.080623626709},
+  {"Police",454.4,-1017.6,28.4},
   {"EMS",-492.08544921875,-336.749206542969,34.3731842041016},
+  {"PDHeli",481.621856689453,-982.223693847656,41.0080757141113},
   -- {"bikes",-352.038482666016,-109.240043640137,38.6970825195313},
-  {"helicopters",1750, 3260, 41.37},
-  {"helicopters",-1233, -2269, 13.9},
-  {"helicopters",-745, -1468, 5},
-  {"boats",-849.5, -1368.64, 1.6},
-  {"boats",1538, 3902, 30.35},
-  {"trailers",-978.674682617188,-2994.29028320313,13.945068359375},
-  {"transport",-962.553039550781,-2965.82470703125,13.9450702667236}
+  {"Helicopters",1750, 3260, 41.37},
+  {"Helicopters",-1233, -2269, 13.9},
+  {"Helicopters",-745, -1468, 5},
+  -- {"boats",-849.5, -1368.64, 1.6},
+  -- {"boats",1538, 3902, 30.35},
+  {"Trailers",-978.674682617188,-2994.29028320313,13.945068359375},
+  {"Transport",-962.553039550781,-2965.82470703125,13.9450702667236}
 }
 
 return cfg

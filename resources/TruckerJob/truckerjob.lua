@@ -31,12 +31,12 @@ local Truck = {"HAULER", "PACKER", "PHANTOM"}
 local Trailer = {"TANKER", "TRAILERS", "TRAILERS2", "TRAILERLOGS"}
 
 local MissionData = {
-    [0] = {1212.4463, 2667.4351, 38.79, 5000}, --x,y,z,money
-    [1] = {2574.5144, 328.5554, 108.45, 10000},
-    [2] = {-2565.0894, 2345.8904, 33.06, 15000},
-    [3] = {1706.7966, 4943.9897, 42.16, 20000},
-    [4] = {196.5617, 6631.0967, 31.53, 30000},
-    [5] = {68.42, 96.07, 79.00, 1337}
+    [0] = {1212.4463, 2667.4351, 38.79, 100}, --x,y,z,money
+    [1] = {2574.5144, 328.5554, 108.45, 100},
+    [2] = {-2565.0894, 2345.8904, 33.06, 100},
+    [3] = {1706.7966, 4943.9897, 42.16, 100},
+    [4] = {196.5617, 6631.0967, 31.53, 100},
+    [5] = {68.42, 96.07, 79.00, 100}
 }
 local MISSION = {}
 MISSION.start = false
@@ -130,8 +130,8 @@ end)
 
 function init()
     BLIP.company = AddBlipForCoord(TruckingCompany[0]["x"], TruckingCompany[0]["y"], TruckingCompany[0]["z"])
-    SetBlipSprite(BLIP.company, 67)
-    SetBlipDisplay(BLIP.company, 4)
+    SetBlipSprite(BLIP.company, 318) --67 OC
+    SetBlipDisplay(BLIP.company, 4) --4 oc
     SetBlipScale(BLIP.company, 0.8)
     Citizen.Trace("Truck Blip added.")
    -- GUI.loaded = true
@@ -158,7 +158,7 @@ function tick()
                 GUI.drawStartText()
             end
                 --key controlling
-                if(IsControlPressed(1, Keys["N+"]) and GUI.showMenu == false) then
+                if(IsControlPressed(1, Keys["E"]) and GUI.showMenu == false) then
                     --clear()
                     GUI.showMenu = true
                     GUI.menu = 0
@@ -259,7 +259,7 @@ function MISSION.spawnTruck()
     
     MISSION.truck = CreateVehicle(MISSION.hashTruck, 12.1995, -1.174761, 73.000, 0.0, true, false)
     SetVehicleOnGroundProperly(MISSION.trailer)
-    SetVehicleNumberPlateText(MISSION.truck, "M15510")
+    SetVehicleNumberPlateText(MISSION.truck, "BIGHOS")
     SetVehRadioStation(MISSION.truck, "OFF")
 	SetPedIntoVehicle(playerPed, MISSION.truck, -1)
     SetVehicleEngineOn(MISSION.truck, true, false, false)
@@ -310,8 +310,8 @@ function MISSION.removeMarker()
 end
 
 function MISSION.getMoney()
-   TriggerEvent("es:addedMoney", currentMission[4])
-    TriggerEvent("truckerJob:getMoney", currentMission[4])
+   TriggerServerEvent('mission:completed', 100)
+   DrawMissionText("Good job! here is some ~y~cash trucker.", 100)
 end
 ---------------------------------------
 ---------------------------------------
@@ -321,7 +321,7 @@ end
 ---------------------------------------  
 ---------------------------------------
 function GUI.drawStartText()
-    TriggerEvent("mt:missiontext", "You want to be a trucker? Press ~r~N+~w~ to start.", 500)
+    TriggerEvent("mt:missiontext", "You want to be a trucker? Press ~r~E~w~ to start.", 500)
     --GUI.showStartText = true
 end
 
@@ -341,17 +341,17 @@ function GUI.init()
     GUI.addButton(0, "Container trailer", GUI.optionMisson, 0.35, 0.30, 0.3, 0.05 )
     GUI.addButton(0, "Articulated trailer", GUI.optionMisson, 0.35, 0.35, 0.3, 0.05 )
     GUI.addButton(0, "Log trailer", GUI.optionMisson, 0.35, 0.40, 0.3, 0.05 )
-    GUI.addButton(0, " ", GUI.null, 0.35, 0.45, 0.3, 0.05)
+    -- GUI.addButton(0, " ", GUI.null, 0.35, 0.45, 0.3, 0.05)
     GUI.addButton(0, "Exit Menu", GUI.exit, 0.35, 0.50, 0.3, 0.05 )
     
     GUI.buttonCount = 0
     
-    GUI.addButton(1, "Mission 1 [ 5.000$ ]", GUI.mission, 0.35, 0.25, 0.3, 0.05)
-    GUI.addButton(1, "Mission 2 [ 10.000$ ]", GUI.mission, 0.35, 0.30, 0.3, 0.05)
-    GUI.addButton(1, "Mission 3 [ 15.000$ ]", GUI.mission, 0.35, 0.35, 0.3, 0.05)
-    GUI.addButton(1, "Mission 4 [ 20.000$ ]", GUI.mission, 0.35, 0.40, 0.3, 0.05)
-    GUI.addButton(1, "Mission 5 [ 30.000$ ]", GUI.mission, 0.35, 0.45, 0.3, 0.05)
-    GUI.addButton(1, "For Testing! [ 1.337$ ]", GUI.mission, 0.35, 0.50, 0.3, 0.05)
+    GUI.addButton(1, "Mission 1 [ 200$ ]", GUI.mission, 0.35, 0.25, 0.3, 0.05)
+    GUI.addButton(1, "Mission 2 [ 200$ ]", GUI.mission, 0.35, 0.30, 0.3, 0.05)
+    GUI.addButton(1, "Mission 3 [ 200$ ]", GUI.mission, 0.35, 0.35, 0.3, 0.05)
+    GUI.addButton(1, "Mission 4 [ 200$ ]", GUI.mission, 0.35, 0.40, 0.3, 0.05)
+    GUI.addButton(1, "Mission 5 [ 200$ ]", GUI.mission, 0.35, 0.45, 0.3, 0.05)
+    -- GUI.addButton(1, "For Testing! [ 250$ ]", GUI.mission, 0.35, 0.50, 0.3, 0.05)
     GUI.addButton(1, "Exit Menu", GUI.exit, 0.35, 0.55, 0.3, 0.05)
 end
 
