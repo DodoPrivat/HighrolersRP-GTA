@@ -8,8 +8,9 @@ local cfg = {}
 --- onjoin (optional): function(player) (called when the player join the group)
 --- onleave (optional): function(player) (called when the player leave the group)
 --- (you have direct access to vRP and vRPclient, the tunnel to client, in the config callbacks)
---police function
+-- Police
 local police = {}
+
 function police.init(player)
   local weapons = {}
   weapons["WEAPON_STUNGUN"] = {ammo=1000}
@@ -17,6 +18,7 @@ function police.init(player)
   weapons["WEAPON_NIGHTSTICK"] = {ammo=0}
   weapons["WEAPON_FLASHLIGHT"] = {ammo=0}
   weapons["WEAPON_FLARE"] = {ammo=20}
+  -- ShotGun / Carbine
 
   
   vRPclient.giveWeapons(player,{weapons,true})
@@ -57,6 +59,8 @@ function police.onspawn(player)
             })
 end
 
+-- OffDuty Cop
+
 local offduty = {}
 function offduty.onjoin(player)
           TriggerClientEvent("pNotify:SendNotification", source, {
@@ -88,7 +92,10 @@ function offduty.onleave(player)
             })
 end
 
+-- EMS
+
 local ems = {}
+
 function ems.init(player)
   local weapons = {}
   weapons["WEAPON_FIREEXTINGUISHER"] = {ammo=0}
@@ -133,7 +140,10 @@ function ems.onspawn(player)
             })
 end
 
+-- Taxi
+
 local taxi = {}
+
 function taxi.onjoin(player)
           TriggerClientEvent("pNotify:SendNotification", source, {
             text = "You are a Taxi Driver",
@@ -164,7 +174,10 @@ function taxi.onleave(player)
             })
 end
 
+-- News
+
 local news = {}
+
 function news.onjoin(player)
           TriggerClientEvent("pNotify:SendNotification", source, {
             text = "Joined Weasel News",
@@ -202,7 +215,10 @@ function news.onleave(player)
             })
 end
 
+-- Citizen
+
 local citizen = {}
+
 function citizen.onjoin(player)
           TriggerClientEvent("pNotify:SendNotification", source, {
             text = "You are an Unemployed Citizen",
@@ -233,7 +249,10 @@ function citizen.onleave(player)
             })
 end
 
+-- Tow
+
 local tow = {}
+
 function tow.onjoin(player)
           TriggerClientEvent("pNotify:SendNotification", source, {
             text = "You are a Mechanic",
@@ -264,7 +283,20 @@ function tow.onleave(player)
             })
 end
 
+-- Brokia Phone
+
 local brokia = {}
+
+function brokia.onspawn(player)
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Your phone has been replaced!",
+            type = "info",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
+end
+
 function brokia.onjoin(player)
 local user_id = vRP.getUserId(player)
   vRP.giveInventoryItem(user_id,"brokia", 1)
@@ -288,14 +320,41 @@ function brokia.onleave(player)
             })
 end
 
+-- License
+
+local license = {}
+
+function license.onjoin(player)
+local user_id = vRP.getUserId(player)
+  vRP.giveInventoryItem(user_id,"license", 1)
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You've been given a Drivers License",
+            type = "success",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
+end
+
+function license.onleave(player)
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "You have lost your Drivers License",
+            type = "error",
+            timeout = math.random(1000, 10000),
+            layout = "centerRight",
+            queue = "left"
+            })
+end
+
+-- User
+
 local function user_spawn(player)
   local user_id = vRP.getUserId(player)
   if user_id ~= nil and vRP.isFirstSpawn(user_id) then
     -- welcome instructions
     local data = vRP.getUserDataTable(user_id)
-
           TriggerClientEvent("pNotify:SendNotification", source, {
-            text = "Loading : Please wait for the 'Loading...' box to disappear!",
+            text = "Loading : Please wait for the 'Loading...' box below to disappear!",
             type = "info",
             timeout = math.random(1000, 50000),
             layout = "centerRight",
@@ -303,6 +362,8 @@ local function user_spawn(player)
             })
   end
 end
+
+-- Groups Config
 
 cfg.groups = {
  
@@ -325,7 +386,7 @@ cfg.groups = {
     "player.group.add",
     "player.group.remove",
     "player.givemoney",
-    "player.giveitem",
+    "player.giveitem"
   },
   -- Group : User added to all new Users
   ["user"] = {
@@ -333,12 +394,15 @@ cfg.groups = {
     "police.askid",
     "phones.store",
     "player.list",
-    "citizen.paycheck",
-    "player.list"
+    "citizen.paycheck"
+  },
+  ["Driver's License"] = {
+    _config = { gtype = "license", onspawn = license.onspawn, onjoin = license.onjoin, onleave = license.onleave },
+    "driver.ls"
   },
   -- Phone Group
   ["Activate Brokia Phone"] = {
-    _config = { gtype = "phone", onjoin = brokia.onjoin, onleave = brokia.onleave },
+    _config = { gtype = "phone", onspawn = brokia.onspawn, onjoin = brokia.onjoin, onleave = brokia.onleave },
     "player.phone",
     "phone.bill"
   },
@@ -405,11 +469,17 @@ cfg.groups = {
     "citizen.paycheck",
     "player.list"
   },
+  ["Delivery Person"] = {
+    _config = { gtype = "job" }
+    "citizen.paycheck",
+    "delivery.shop",
+    "delivery.vehicle"
+  },
   ["Tow"] = {
     _config = { gtype = "job", onspawn = tow.onspawn, onjoin = tow.onjoin, onleave = tow.onleave }
     "vehicle.repair",
     "vehicle.replace",
-    "repair.service", 
+    "repair.service",
     "tow.shop"
   }
 }
@@ -419,7 +489,6 @@ cfg.users = {
 -- Dimmies
   [1] = { "admin", "OffDuty" } 
 }
-
 
 -- group selectors
 -- _config
@@ -431,7 +500,8 @@ cfg.selectors = {
     "Taxi",
     "Citizen",
     "Tow",
-    "News"
+    "News",
+    "Delivery Person"
   },
   ["Police"] = {
     _config = {x = 440.360168457031,y = -993.374755859375, z = 30.6895999908447 , blipid = 351, blipcolor= 38, permission = "police.access" },
@@ -444,12 +514,11 @@ cfg.selectors = {
     "Citizen"
   },
   ["Life Invader"] = {
-    _config = { x=-1082.90014648438,y=-248.791107177734,z=37.7632904052734, blipid = 351, blipcolor= 1 },
+    _config = { x=-1082.90014648438,y=-248.791107177734,z=37.7632904052734, blipid = 77, blipcolor= 1 },
     "Activate Brokia Phone",
     "Cancel Contract"
   }
 }
-
 return cfg
 
 -- 60 103 125

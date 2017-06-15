@@ -201,10 +201,9 @@ cfg.garage_types = {
     ["ambulance"] = {"Ambulance",100,""},
     ["firetruk"] = {"FireTruck",100,""}
   },
-  ["Bikes"] = {
-    _config = {vtype="bike",blipid=376,blipcolor=4},
-    ["tribike"] = {"Tribike", 250, ""},
-    ["BMX"] = {"BMX", 450, ""}
+    ["Bike Salesmen"] = {
+    _config = {vtype="firstcar", blipid=56,blipcolor=5},
+    ["BMX"] = {"Bike",50,""}
   },
   -- ["boats"] = {
   --   _config = {vtype="boat",blipid=427,blipcolor=4},
@@ -227,18 +226,6 @@ cfg.garage_types = {
   --   ["predator"] = {"Predator", 600000, "Un bateau rapide."},
   --   ["suntrap"] = {"Suntrap", 250000, "Bateau de plaisance."}
   -- },
-  -- ["planes"] = {
-  --   _config = {vtype="fly",blipid=307,blipcolor=4},
-  --   ["velum"] = {"Velum", 500000, "Avion à hélice."},
-  --   ["velum2"] = {"Velum II", 500000, "Avion à hélice."},
-  --   ["stunt"] = {"Stunt", 250000, "Petit avion à hélice."},
-  --   ["mammatus"] = {"Mammatus", 250000, "Petit avion à hélice."},
-  --   ["dodo"] = {"Dodo", 250000, "Petit avion à hélice."},
-  --   ["duster"] = {"Duster", 105000, "Vieux avion à hélice."},
-  --   ["cuban800"] = {"Cuban 800", 250000, "Petit avion à hélice."},
-  --   ["luxor"] = {"Luxor", 3500000, "Jet privé."},
-  --   ["luxor2"] = {"Luxor II", 3500000, "Jet privé."}
-  -- },
   ["Helicopters"] = {
     _config = {vtype="fly",blipid=43,blipcolor=4},
     ["maverick"] = {"Maverick", 350000, "Entry Level Helicopter"},
@@ -260,6 +247,10 @@ cfg.garage_types = {
     ["burrito3"] = {"Declasse Burriot", 18000, "Van : Holds 100lbs"},
     ["pounder"] = {"MTL Pounder", 28000, "Large Truck w/ Cabin and Trailer : Holds 150lbs"}
   },
+  ["Delivery Vehicles"] = {
+    _config = {vtype="car",blipid=61,blipcolor=3,permission="delivery.vehicle"},
+    ["boxville2"] = {"Delivery Truck",1000,""}
+  },
   ["Trailers"] = {
     _config = {vtype="trailer",blipid=318,blipcolor=17},
     ["trailersmall"] = {"Petit", 3000, "Small Trailer : Holds 100lbs"},
@@ -271,19 +262,20 @@ cfg.garage_types = {
 -- {garage_type,x,y,z}
 cfg.garages = {
   {"Cars",-43.9820404052734,-1096.92199707031,26.4223537445068},
-  {"Beaters",261.612365722656,-1186.61938476563,29.510461807251},
+  -- {"Beaters",261.612365722656,-1186.61938476563,29.510461807251},
   {"Job",-286.870056152344,-917.948181152344,31.080623626709},
   {"Police",454.4,-1017.6,28.4},
   {"EMS",-492.08544921875,-336.749206542969,34.3731842041016},
   {"PDHeli",481.621856689453,-982.223693847656,41.0080757141113},
-  -- {"bikes",-352.038482666016,-109.240043640137,38.6970825195313},
+  {"Bike Salesmen",261.612365722656,-1186.61938476563,29.510461807251},
   {"Helicopters",1750, 3260, 41.37},
   {"Helicopters",-1233, -2269, 13.9},
   {"Helicopters",-745, -1468, 5},
   -- {"boats",-849.5, -1368.64, 1.6},
   -- {"boats",1538, 3902, 30.35},
   {"Trailers",-978.674682617188,-2994.29028320313,13.945068359375},
-  {"Transport",-962.553039550781,-2965.82470703125,13.9450702667236}
+  {"Transport",-962.553039550781,-2965.82470703125,13.9450702667236},
+  {"Delivery Vehicles",-411.050354003906,6176.798828125,31.4781970977783}
 }
 
 return cfg

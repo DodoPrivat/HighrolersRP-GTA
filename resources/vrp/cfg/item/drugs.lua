@@ -98,7 +98,7 @@ marijuana_choices["Eat?"] = {function(player,choice)
     end
   end
 end}
-items["marijuana"] = {"Marijuana","The Raw Dawg of Weed",weed_choices,1}
+items["marijuana"] = {"Marijuana","Savage Cabbage",weed_choices,1}
 
 local meth_choices = {}
 meth_choices["Take"] = {function(player,choice)
@@ -120,8 +120,7 @@ meth_choices["Take"] = {function(player,choice)
     end
   end
 end}
-items["meth"] = {"Meth","The Devils Cough Medicine",meth_choices,0.5}
-
+items["meth"] = {"Meth","The Devils Cough Medicine",meth_choices,2}
 
 
 return items

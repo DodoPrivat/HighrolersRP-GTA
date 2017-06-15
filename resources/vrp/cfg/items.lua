@@ -47,12 +47,21 @@ cfg.items = {
   ["Window Cleaner"] = {"Window Cleaner","",{},1.0},
   ["Cold Medicine"] = {"Cold Medicine","",{},0.3},
   ["Hydrochloric Acid"] = {"Hydrochloric Acid","",{},1.0},
-  ["Box of Matches"] = {"Box of Matches","",{},0.1},
+  ["Box of Matches"] = {"Box of Matches","",{},0.4},
   ["Brake Fluid"] = {"Brake Fluid","",{},1.0},
-  ["lye"] = {"lye","",{},0.3},
-  ["Drain Cleaner"]= {"Drain Cleaner","",{},0.3},
+  ["lye"] = {"lye","",{},1.0},
+  ["Drain Cleaner"]= {"Drain Cleaner","",{},1.0},
+
 --Phones
-  ["brokia"]= {"Brokia Phone","",{},0.0}
+  ["brokia"]= {"Brokia Phone","",{},0.0},
+
+--delivery products
+  ["TV"]= {"Television","",{},30.0},
+  ["beer"]= {"Crate of Beer","",{},25.0},
+  ["phonecrate"]= {"Crate of Phones","",{},15.0},
+  ["furbees"]= {"Crate of Furbees","",{},20},
+  ["golfball"]= {"Bucket of Golf Balls","",{},20}
+
 }
 
 -- load more items function

@@ -522,5 +522,26 @@ pdonut_choices["Eat"] = {function(player,choice)
 end}
 items["pdonut"] = {"Premium Donut","",pdonut_choices,0.5}
 
+-- create Pizza item
+local pizza_choices = {}
+pizza_choices["Eat"] = {function(player,choice)
+  local user_id = vRP.getUserId(player)
+  if user_id ~= nil then
+    if vRP.tryGetInventoryItem(user_id,"pizza",1) then
+      vRP.varyHunger(user_id,-25)
+          TriggerClientEvent("pNotify:SendNotification", source, {
+            text = "Eating Pizza",
+            type = "info",
+            timeout = math.random(1000, 3500),
+            layout = "centerRight",
+            queue = "left"
+            })
+      play_eat(player)
+      vRP.closeMenu(player)
+    end
+  end
+end}
+items["pizza"] = {"Pizza","",pizza_choices,0.8}
+
 
 return items

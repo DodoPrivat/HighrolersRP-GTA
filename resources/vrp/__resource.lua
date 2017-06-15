@@ -32,7 +32,8 @@ server_scripts{
   "modules/cloakroom.lua",
   
   -- custom
-  "modules/paycheck.lua"
+  "modules/paycheck.lua",
+  "modules/driver_cl.lua"
 }
 
 -- client scripts
@@ -51,6 +52,7 @@ client_scripts{
   "client/police.lua",
   "client/admin.lua",
   "client/paycheck.lua",
+  "client/driver_cl.lua"
 }
 
 -- client files

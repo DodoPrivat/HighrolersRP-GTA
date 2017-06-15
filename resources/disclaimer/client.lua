@@ -8,7 +8,7 @@ AddEventHandler('onClientMapStart', function()
 
     while display do
       Citizen.Wait(1)
-      ShowInfo('Welcome to~y~HighrolersRP~w~ Press ~INPUT_CONTEXT~ to close!', 0)
+      ShowInfo('Welcome to ~y~HighrolersRP~w~ Press ~INPUT_CONTEXT~ to close!', 0)
       if (GetTimeDifference(GetGameTimer(), startTime) > delay) then
         display = false
         TriggerEvent('disclaimer:display', false)

@@ -26,8 +26,8 @@ cfg.fines = {
   ["Speeding Class 2"] = 250,
   ["Traffic Violation"] = 250,
   ["Minor Posession"] = 350,
-  ["Parking Violation"] = 100,
-  ["Unroadworthy Vehicle"] = 100
+  ["Parking Violation"] = 150,
+  ["Vehicle Violation"] = 150
 }
 
 return cfg

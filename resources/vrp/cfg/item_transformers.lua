@@ -190,17 +190,17 @@ cfg.item_transformers = {
     in_money=0,
     out_money=0,
     reagents={
-    ["Nail Polish Remover"] = 10,
-    ["Window Cleaner"] = 3,
+    ["Nail Polish Remover"] = 3,
+    ["Window Cleaner"] = 5,
     ["Cold Medicine"] = 15,
-    ["Hydrochloric Acid "] = 8,
-    ["Box of Matches"] = 8,
+    ["Hydrochloric Acid "] = 5,
+    ["Box of Matches"] = 13,
     ["Brake Fluid"] = 9,
-    ["lye"] = 8,
-    ["Drain Cleaner"] = 14
+    ["lye"] = 5,
+    ["Drain Cleaner"] = 6
     },
     products={
-      ["Meth"] = 15
+      ["Meth"] = 30
     }
   },
     {
@@ -221,7 +221,6 @@ cfg.item_transformers = {
     ["dirty_money"] = 400
   }
 },
-
   {
    name=" Meth Dealer",
    r=255,g=255,b=0,
@@ -234,13 +233,12 @@ cfg.item_transformers = {
    in_money=0,
    out_money=0,
    reagents={
-     ["meth"] = 2,
+     ["meth"] = 1,
    },
    products={
    ["dirty_money"] = 800
   }
 },
-
   {  
     name="Jeweler",
     r=255,g=255,b=0,
@@ -256,8 +254,78 @@ cfg.item_transformers = {
       ["gold_ingot"] = 1
     },
     products={}
+  },
+  {
+    name="Beer",
+    r=255,g=255,b=0,
+    max_units=5000,
+    units_per_minute=5000,
+    x=1996.38854980469,y=3037.45532226563,z=47.0267562866211, 
+    radius=8,height=1.5,
+    action="Deliver Beer",
+    description="Deliver Beer",
+    in_money=0,
+    out_money=850,
+    reagents={},
+    products={}
+  },
+  {
+    name="Golf Balls",
+    r=255,g=255,b=0,
+    max_units=5000,
+    units_per_minute=5000,
+    x=-1352.02990722656,y=121.031051635742,z=56.2387504577637, 
+    radius=8,height=1.5,
+    action="Deliver Golf Balls",
+    description="Deliver Golf Balls",
+    in_money=0,
+    out_money=1000,
+    reagents={},
+    products={}
+  },
+  {
+    name="Television",
+    r=255,g=255,b=0,
+    max_units=5000,
+    units_per_minute=5000,
+    x=-1326.96484375,y=-929.27783203125,z=11.2021236419678, 
+    radius=8,height=1.5,
+    action="Deliver TVs",
+    description="Deliver TVs",
+    in_money=0,
+    out_money=750,
+    reagents={},
+    products={}
+  },
+  {
+    name="Phones",
+    r=255,g=255,b=0,
+    max_units=5000,
+    units_per_minute=5000,
+    x=-1051.91662597656,y=-249.642852783203,z=37.867130279541, 
+    radius=8,height=1.5,
+    action="Deliver Phones",
+    description="Deliver Phones",
+    in_money=0,
+    out_money=1150,
+    reagents={},
+    products={}
+  },
+  {
+    name="Furbees",
+    r=255,g=255,b=0,
+    max_units=5000,
+    units_per_minute=5000,
+    x=-592.938110351563,y=-1129.85705566406,z=22.1782302856445, 
+    radius=8,height=1.5,
+    action="Deliver Furbees",
+    description="Deliver Furbees",
+    in_money=0,
+    out_money=950,
+    reagents={},
+    products={}
+    }
   }
-}
 
 -- define transformers randomly placed on the map
 cfg.hidden_transformers = {

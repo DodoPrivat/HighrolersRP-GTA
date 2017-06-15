@@ -117,20 +117,6 @@ function tvRP.getOwnedVehiclePosition()
   return false,0,0,0
 end
 
-function tvRP.fixeNearestVehicle(radius)
-  local veh = tvRP.getNearestVehicle(radius)
-  if IsEntityAVehicle(veh) then
-    SetVehicleFixed(veh)
-  end
-end
-
-function tvRP.replaceNearestVehicle(radius)
-  local veh = tvRP.getNearestVehicle(radius)
-  if IsEntityAVehicle(veh) then
-    SetVehicleOnGroundProperly(veh)
-  end
-end
-
 -- eject the ped from the vehicle
 function tvRP.ejectVehicle()
   local ped = GetPlayerPed(-1)
@@ -185,7 +171,7 @@ function tvRP.vc_toggleEngine(vtype)
   local vehicle = vehicles[vtype]
   if vehicle then
     local running = Citizen.InvokeNative(0xAE31E7DF9B5B132E,vehicle[3]) -- GetIsVehicleEngineRunning
-    SetVehicleEngineOn(vehicle[3],not running,true,true)
+   SetVehicleEngineOn(vehicle[3],not running,true,true)
   end
 end
 

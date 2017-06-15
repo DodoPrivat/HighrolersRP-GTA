@@ -36,6 +36,14 @@ cfg.market_types = {
     ["coffee"] = 0,
     ["donut"] = 0
   },
+   ["Products"] = {
+    _config = {blipid=51, blipcolor=2, permission="delivery.shop"},
+    ["TV"] = 600,
+    ["phonecrate"] = 1000,
+    ["furbees"] = 800,
+    ["golfball"] = 900,
+    ["beer"] = 700
+  },
   ["bar"] = {
     _config = {blipid=93, blipcolor=4},
     ["vodka"] = 20,
@@ -44,7 +52,7 @@ cfg.market_types = {
     ["beer"] = 10,
     ["wine"] = 55,
     ["wings"] = 25,
-    ["Box of Matches"] = 8
+    ["Box of Matches"] = 3
   },
   ["tools"] = {
     _config = {blipid=51, blipcolor=47, permission="tow.shop"},
@@ -81,7 +89,8 @@ cfg.markets = {
   {"bar",-560.127807617188,287.055633544922,82.1764602661133}, --Tequi-La-La
   {"bar",1985.67993164063,3053.75390625,47.2151870727539}, -- Yellow Jack
   {"bar",128.1410369873,-1286.1120605469,29.281036376953}, -- Strip Club
-  {"tools",-302.475036621094,-924.595031738281,31.0806159973145}
+  {"tools",-302.475036621094,-924.595031738281,31.0806159973145},
+  {"Products",-439.8359375,6146.7470703125,31.4782104492188}  -- Postop
 }
 
 return cfg
